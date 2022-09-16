@@ -1,20 +1,39 @@
 import random
 import string
 
-from flask import Blueprint, render_template, request, redirect, url_for, jsonify
+from flask import Blueprint, render_template, request, redirect, url_for, jsonify, session,flash
 from exts import mail, db
 from flask_mail import Message
 from models import EmailCaptchaModel, UserModel
 from datetime import datetime
-from .forms import RegisterForm
-from werkzeug.security import generate_password_hash,check_password_hash
+from .forms import RegisterForm, LoginForm
+from werkzeug.security import generate_password_hash, check_password_hash
 
 bp = Blueprint("user", __name__, url_prefix="/user")
 
 
-@bp.route("/login")
+@bp.route("/login", methods=['GET', 'POST'])
 def login():
-    return render_template("login.html")
+    if request.method == "GET":
+        return render_template("login.html")
+        print("sd")
+    else:
+        form = LoginForm(request.form)
+        if form.validate():
+            email = form.email.data
+            password = form.password.data
+            user = UserModel.query.filter_by(email=email).first()
+            if user and check_password_hash(user.password, password):
+                print("ss")
+                session['user_id'] = user.id
+                return redirect("/forum")
+
+            else:
+                flash("The email and password do not match")
+                return redirect(url_for("user.login"))
+        else:
+            flash("The email and password formats are incorrect")
+            return redirect(url_for("user.login"))
 
 
 @bp.route("/register", methods=['GET', 'POST'])

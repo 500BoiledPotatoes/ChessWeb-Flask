@@ -1,15 +1,15 @@
-from flask import Flask, jsonify, url_for, redirect, render_template
+from flask import Flask, jsonify, url_for, redirect, render_template, session, g
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from exts import db, mail
 from blueprints import user_bp
 from blueprints import forum_bp
-
+from models import UserModel
 import config
 
 app = Flask(__name__)
 app.config.from_object(config)
-
+app.secret_key = "fjhierhgiejgeriojgo"
 
 db.init_app(app)
 mail.init_app(app)
@@ -17,6 +17,25 @@ migrate = Migrate(app, db)
 
 app.register_blueprint(user_bp)
 app.register_blueprint(forum_bp)
+
+
+@app.before_request
+def before_request():
+    user_id = session.get("user_id")
+    if user_id:
+        try:
+            user = UserModel.query.get(user_id)
+            g.user = user
+        except:
+            g.user = None
+
+
+@app.context_processor
+def context_processor():
+    if hasattr(g, "user"):
+        return {"user": g.user}
+    else:
+        return {}
 
 
 @app.route('/')
