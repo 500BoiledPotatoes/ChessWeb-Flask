@@ -36,6 +36,11 @@ def login():
             return redirect(url_for("user.login"))
 
 
+@bp.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for('user.login'))
+
 @bp.route("/register", methods=['GET', 'POST'])
 def register():
     if request.method == "POST":

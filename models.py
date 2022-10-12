@@ -17,3 +17,23 @@ class UserModel(db.Model):
     email = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(200), nullable=False, unique=True)
     join_time = db.Column(db.DateTime, default=datetime.now)
+
+class ForumModel(db.Model):
+    __tablename__ = "forum"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.String(200), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    author_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    author = db.relationship("UserModel", backref="forum")
+    create_time = db.Column(db.DateTime, default=datetime.now)
+
+class AnswerModel(db.Model):
+    __tablename__ = "answer"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    content = db.Column(db.Text,nullable=False)
+    create_time = db.Column(db.DateTime,default=datetime.now)
+    question_id = db.Column(db.Integer,db.ForeignKey("forum.id"))
+    author_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+
+    question = db.relationship("ForumModel",backref=db.backref("answers",order_by=create_time.desc()))
+    author = db.relationship("UserModel",backref="answers")

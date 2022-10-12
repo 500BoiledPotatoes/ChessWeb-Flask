@@ -1,5 +1,5 @@
 import wtforms
-from wtforms.validators import length, email, EqualTo
+from wtforms.validators import length, email, EqualTo, InputRequired
 from models import EmailCaptchaModel, UserModel
 
 class LoginForm(wtforms.Form):
@@ -34,3 +34,10 @@ class RegisterForm(wtforms.Form):
         print("5")
         if user_mod:
             raise wtforms.ValidationError("An account with the same username already exists")
+
+class ForumForm(wtforms.Form):
+    title = wtforms.StringField(validators=[length(min=3, max=200)])
+    content = wtforms.StringField(validators=[length(min=5)])
+
+class AnswerForm(wtforms.Form):
+    content = wtforms.StringField(validators=[length(min=1)])
