@@ -8,8 +8,7 @@ class EmailCaptchaModel(db.Model):
     email = db.Column(db.String(100), nullable=False, unique=True)
     captcha = db.Column(db.String(10), nullable=False)
     create_time = db.Column(db.DateTime, default=datetime.now)
-
-
+# Table of verification codes
 class UserModel(db.Model):
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -18,7 +17,7 @@ class UserModel(db.Model):
     password = db.Column(db.String(200), nullable=False, unique=True)
     join_time = db.Column(db.DateTime, default=datetime.now)
     icon = db.Column(db.String(100))
-
+# Table of user info
 class ForumModel(db.Model):
     __tablename__ = "forum"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -30,7 +29,7 @@ class ForumModel(db.Model):
     click_num = db.Column(db.Integer, default=0)
     save_num = db.Column(db.Integer, default=0)
     love_num = db.Column(db.Integer, default=0)
-
+# Table of posts
 class AnswerModel(db.Model):
     __tablename__ = "answer"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -44,3 +43,4 @@ class AnswerModel(db.Model):
 
     def __str__(self):
         return self.content
+# Table of comments

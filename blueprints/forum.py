@@ -13,6 +13,7 @@ bp = Blueprint("forum", __name__, url_prefix="/forum")
 def forum():
     questions = ForumModel.query.order_by(db.text("-create_time")).all()
     return render_template("forum.html", questions=questions)
+# Traverse the forum messages based on the creation time
 
 
 @bp.route("/question", methods=['GET', 'POST'])
@@ -27,11 +28,13 @@ def post_question():
             content = form.content.data
             forum = ForumModel(title=title, content=content, author=g.user)
             db.session.add(forum)
+            # Load the post information into the database
             db.session.commit()
             return redirect(url_for("forum.forum"))
         else:
             flash("Formal error")
             return redirect(url_for("forum.post_question"))
+# Realize the function of Posting
 
 
 
@@ -39,6 +42,7 @@ def post_question():
 def question_detail(question_id):
     question = ForumModel.query.get(question_id)
     return render_template("detail.html", question=question)
+# See the details of each post
 
 
 @bp.route("/answer/<int:question_id>",methods=['POST'])
@@ -49,22 +53,21 @@ def answer(question_id):
         content = form.content.data
         answer_model = AnswerModel(content=content,author=g.user,question_id=question_id)
         db.session.add(answer_model)
+        # Load the comment information into the database
         db.session.commit()
         return redirect(url_for("forum.question_detail",question_id=question_id))
     else:
-        flash("表单验证失败！")
+        flash("Form validation failed!")
         return redirect(url_for("forum.question_detail", question_id=question_id))
+# The ability to comment on posts
 
 
 @bp.route("/search")
 def search():
-    # /search?q=xxx
     q = request.args.get("q")
-    # filter_by：直接使用字段的名称
-    # filter：使用模型.字段名称
     questions =ForumModel.query.filter(or_(ForumModel.title.contains(q),ForumModel.content.contains(q))).order_by(db.text("-create_time"))
     return render_template("forum.html", questions=questions)
-
+# Search for posts by keyword
 
 
 

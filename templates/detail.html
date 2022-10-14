@@ -20,7 +20,6 @@
       <hr>
       <p class="question-content">{{ question.content }}</p>
       <hr>
-
       <h4 class="comment-group-title">Comments（{{ question.answers|length }}）：</h4>
       <form action="{{ url_for('forum.answer',question_id=question.id) }}" method="post">
         <div class="form-group">
@@ -36,6 +35,7 @@
         </div>
       </form>
       <ul class="comment-group">
+      # Comment Post view
         {% for answer in question.answers %}
           <li>
             <div class="user-info">
@@ -50,4 +50,5 @@
     </div>
     <div class="col"></div>
   </div>
+    # Post Details Webpage
 {% endblock %}

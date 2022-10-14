@@ -4,20 +4,27 @@
 
 {% block head %}
   <link rel="stylesheet" href="{{ url_for('static',filename='css/index.css') }}">
+
 {% endblock %}
 
 {% block body %}
+    # Forum main interface
     <div class="jumbotron">
   <h1 class="display-4">Hello, players!</h1>
   <p class="lead">Here is a forum where you can share any interest in chess.</p>
+                    <form class="form-inline my-2 my-lg-0" method="GET" action="{{ url_for('forum.search') }}">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                               name="q">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
   <hr class="my-4">
   <p style="font-size: 20px">Now let's talk!</p>
         <button onclick="window.location.href='{{ url_for('forum.post_question') }}'" >POST</button>
-
+    # Jump to the Posting page
 
       <div class="row" style="margin-top: 20px;">
     <div class="col"></div>
-    <div class="my-4">
+    <div class="col-10">
       <ul class="question-ul">
         {% for question in questions %}
           <li>

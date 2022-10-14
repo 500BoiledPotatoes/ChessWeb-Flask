@@ -19,46 +19,53 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
-                       data-toggle="dropdown" aria-expanded="false">
-                        下棋
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                        <a class="dropdown-item" href="#">创建对局</a>
-                        <a class="dropdown-item" href="#">竞技场</a>
-                        <a class="dropdown-item" href="#">车轮战</a>
-                    </div>
+                <li class="nav-item active">
+                    <a class="nav-link" href="">PLAY<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-expanded="false">
-                        学棋
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">基础</a>
-                        <a class="dropdown-item" href="#">开局</a>
-                        <a class="dropdown-item" href="#">棋谱</a>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="">TUTORIAL</a>
                 </li>
-                <a class="nav-link" href="{{ url_for('forum.forum') }}">社区</a>
                 </li>
-                <li class="nav-item ml-4">
-                    <form class="form-inline my-2 my-lg-0" method="GET" action="{{ url_for('forum.search') }}">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
+                <a class="nav-link" href="{{ url_for('forum.forum') }}">COMMUNITY</a>
                 </li>
-
-
             </ul>
+        # Top navigation bar
+            {##}
+            {#        <div class="collapse navbar-collapse" id="navbarSupportedContent">#}
+            {#            <ul class="navbar-nav mr-auto">#}
+            {#                <li class="nav-item dropdown">#}
+            {#                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"#}
+            {#                       data-toggle="dropdown" aria-expanded="false">#}
+            {#                        下棋#}
+            {#                    </a>#}
+            {#                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">#}
+            {#                        <a class="dropdown-item" href="#">创建对局</a>#}
+            {#                        <a class="dropdown-item" href="#">竞技场</a>#}
+            {#                        <a class="dropdown-item" href="#">车轮战</a>#}
+            {#                    </div>#}
+            {#                </li>#}
+            {#                <li class="nav-item dropdown">#}
+            {#                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"#}
+            {#                       data-toggle="dropdown" aria-expanded="false">#}
+            {#                        学棋#}
+            {#                    </a>#}
+            {#                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
+            {#                        <a class="dropdown-item" href="#">基础</a>#}
+            {#                        <a class="dropdown-item" href="#">开局</a>#}
+            {#                        <a class="dropdown-item" href="#">棋谱</a>#}
+            {#                    </div>#}
+
+
+            {##}
+            {##}
+            {#            </ul>#}
             <ul class="navbar-nav">
                 {% if user %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('user.centre', user_id = user.id)}}">{{ user.username }} </a>
+                        <a class="nav-link"
+                           href="{{ url_for('user.centre', user_id = user.id) }}">{{ user.username }} </a>
 
                     </li>
                     <li class="nav-item">
@@ -72,12 +79,14 @@
                         <a class="nav-link" href="{{ url_for('user.register') }}">注册</a>
                     </li>
                 {% endif %}
+            # Top navigation bar
             </ul>
         </div>
     </div>
 </nav>
 <div class="container">
     {% block body %}{% endblock %}
+# Standard background
 </div>
 </body>
 </html>

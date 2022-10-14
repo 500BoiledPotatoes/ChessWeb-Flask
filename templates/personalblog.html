@@ -19,18 +19,19 @@
 
 
 {% block body %}
+    # Left navigation bar
     <div class="sidebar">
         <div class="logo-details">
-            <i class='bx bxl-c-plus-plus icon'></i>
-            <div class="logo_name">CodingLab</div>
+            <div class="logo_name">WeChess</div>
             <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list">
-            <li>
-                <i class='bx bx-search'></i>
-                <input type="text" placeholder="Search...">
-                <span class="tooltip">Search</span>
-            </li>
+                <li>
+                    <i class='bx bx-search'></i>
+                    <input type="text" placeholder="Search..." name="q">
+                    <span class="tooltip" type="submit">Search</span>
+                </li>
+
             <li>
                 <a href="#">
                     <i class='bx bx-grid-alt'></i>
@@ -82,6 +83,7 @@
             </li>
         </ul>
     </div>
+    # Displays posts by logged-in users
     <section class="home-section">
     <div class="row" >
     <div class="col"></div>

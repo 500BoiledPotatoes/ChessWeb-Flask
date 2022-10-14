@@ -12,3 +12,4 @@ def login_required(func):
             return redirect(url_for("user.login"))
 
     return wrapper
+# Reusable login checks
