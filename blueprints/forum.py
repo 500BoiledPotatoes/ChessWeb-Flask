@@ -1,4 +1,6 @@
 from flask import Blueprint, render_template, g, request, redirect, url_for, flash
+from sqlalchemy import or_
+
 from decorators import login_required
 from exts import db
 from .forms import ForumForm, AnswerForm
@@ -26,10 +28,11 @@ def post_question():
             forum = ForumModel(title=title, content=content, author=g.user)
             db.session.add(forum)
             db.session.commit()
-            return redirect("/")
+            return redirect(url_for("forum.forum"))
         else:
             flash("Formal error")
             return redirect(url_for("forum.post_question"))
+
 
 
 @bp.route("/question/<int:question_id>")
@@ -51,4 +54,17 @@ def answer(question_id):
     else:
         flash("表单验证失败！")
         return redirect(url_for("forum.question_detail", question_id=question_id))
+
+
+@bp.route("/search")
+def search():
+    # /search?q=xxx
+    q = request.args.get("q")
+    # filter_by：直接使用字段的名称
+    # filter：使用模型.字段名称
+    questions =ForumModel.query.filter(or_(ForumModel.title.contains(q),ForumModel.content.contains(q))).order_by(db.text("-create_time"))
+    return render_template("forum.html", questions=questions)
+
+
+
 

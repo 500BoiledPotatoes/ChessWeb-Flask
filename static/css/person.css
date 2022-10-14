@@ -1,0 +1,132 @@
+/* From uiverse.io by @alexruix */
+/*Magic card*/
+.card {
+ width: 390px;
+ height: 454px;
+ background: #f5f5f5;
+ overflow: visible;
+ box-shadow: 0 5px 20px 2px rgba(0,0,0,0.1);
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+position: absolute;
+	left: 25%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+}
+
+.card-info {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 2em;
+ padding: 0 1rem;
+}
+
+.card-img {
+ --size: 120px;
+ width: var(--size);
+ height: var(--size);
+ border-radius: 50%;
+ transform: translateY(-50%);
+ background: #42caff;
+ background: linear-gradient(to bottom, #42caff 0%, #e81aff 100%);
+ position: relative;
+ transition: all .3s ease-in-out;
+}
+
+.card-img::before {
+ content: "";
+ border-radius: inherit;
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ width: 90%;
+ height: 90%;
+ transform: translate(-50%, -50%);
+ border: 1rem solid #e8e8e8;
+}
+
+/*Text*/
+.text-title {
+ font-size: 2em;
+ color: #42caff;
+ letter-spacing: 0.05rem;
+}
+
+.text-body {
+ font-size: .8em;
+ text-align: center;
+ color: #6f6d78;
+ font-weight: 400;
+ font-style: italic;
+}
+.text-level {
+ font-size: 1.5em;
+ text-align: center;
+ color: #6f6d78;
+ font-weight: bolder;
+ font-style: italic;
+}
+
+/*Hover*/
+.card:hover .card-img {
+ --size: 180px;
+ width: var(--size);
+ height: var(--size);
+}
+.timeline {
+    /* Used to position the left vertical line */
+    position: relative;
+}
+
+.timeline__line {
+    /* Border */
+    border-right: 2px solid #d1d5db;
+
+    /* Positioned at the left */
+    left: 0.75rem;
+    position: absolute;
+    top: 0px;
+
+    /* Take full height */
+    height: 100%;
+}
+
+.timeline__items {
+    /* Reset styles */
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.timeline__item {
+    margin-bottom: 8px;
+}
+
+.timeline__top {
+    /* Center the content horizontally */
+    align-items: center;
+    display: flex;
+}
+
+.timeline__circle {
+    /* Rounded border */
+    background-color: #d1d5db;
+    border-radius: 9999px;
+
+    /* Size */
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.timeline__title {
+    /* Take available width */
+    flex: 1;
+    margin-left: 0.5rem;
+}
+
+.timeline__desc {
+    /* Make it align with the title */
+    margin-left: 2rem;
+}

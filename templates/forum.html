@@ -1,27 +1,35 @@
 {% extends "base.html" %}
 
-{% block title %}知了问答-首页{% endblock %}
+{% block title %}{% endblock %}
 
 {% block head %}
   <link rel="stylesheet" href="{{ url_for('static',filename='css/index.css') }}">
 {% endblock %}
 
 {% block body %}
-  <div class="row" style="margin-top: 20px;">
+    <div class="jumbotron">
+  <h1 class="display-4">Hello, players!</h1>
+  <p class="lead">Here is a forum where you can share any interest in chess.</p>
+  <hr class="my-4">
+  <p style="font-size: 20px">Now let's talk!</p>
+        <button onclick="window.location.href='{{ url_for('forum.post_question') }}'" >POST</button>
+
+
+      <div class="row" style="margin-top: 20px;">
     <div class="col"></div>
-    <div class="col-8">
+    <div class="my-4">
       <ul class="question-ul">
         {% for question in questions %}
           <li>
             <div class="side-question">
-              <img class="side-question-avatar" src="{{ url_for('static',filename='images/avatar.jpg') }}" alt="">
+              <img class="side-question-avatar" src="{{ url_for('static',filename='images/avatar.png') }}" alt="">
             </div>
             <div class="question-main">
-              <div class="question-title"><a href="{{ url_for('forum.question_detail',question_id=question.id) }}">{{ question.title }}</a></div>
-              <div class="question-content">{{ question.content }}</div>
+              <div class="question-title"><a style="font-size: 25px" href="{{ url_for('forum.question_detail',question_id=question.id) }}">{{ question.title }}</a></div>
+              <div class="question-content" style="font-size: 20px">{{ question.content }}</div>
               <div class="question-detail">
-                <span class="question-author">{{ question.author.username }}</span>
-                <span class="question-time">{{ question.create_time }}</span>
+                <span class="question-author" style="font-size: 20px">{{ question.author.username }}</span>
+                <span class="question-time" style="font-size: 20px">{{ question.create_time }}</span>
               </div>
             </div>
           </li>
@@ -30,4 +38,5 @@
     </div>
     <div class="col"></div>
   </div>
+</div>
 {% endblock %}

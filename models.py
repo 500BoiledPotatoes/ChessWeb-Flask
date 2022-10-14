@@ -17,6 +17,7 @@ class UserModel(db.Model):
     email = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(200), nullable=False, unique=True)
     join_time = db.Column(db.DateTime, default=datetime.now)
+    icon = db.Column(db.String(100))
 
 class ForumModel(db.Model):
     __tablename__ = "forum"
@@ -26,6 +27,9 @@ class ForumModel(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     author = db.relationship("UserModel", backref="forum")
     create_time = db.Column(db.DateTime, default=datetime.now)
+    click_num = db.Column(db.Integer, default=0)
+    save_num = db.Column(db.Integer, default=0)
+    love_num = db.Column(db.Integer, default=0)
 
 class AnswerModel(db.Model):
     __tablename__ = "answer"
@@ -37,3 +41,6 @@ class AnswerModel(db.Model):
 
     question = db.relationship("ForumModel",backref=db.backref("answers",order_by=create_time.desc()))
     author = db.relationship("UserModel",backref="answers")
+
+    def __str__(self):
+        return self.content

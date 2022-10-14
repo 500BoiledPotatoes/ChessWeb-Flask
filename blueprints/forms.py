@@ -31,7 +31,6 @@ class RegisterForm(wtforms.Form):
     def validate_username(self, field):
         username = field.data
         user_mod = UserModel.query.filter_by(username= username).first()
-        print("5")
         if user_mod:
             raise wtforms.ValidationError("An account with the same username already exists")
 
@@ -41,3 +40,14 @@ class ForumForm(wtforms.Form):
 
 class AnswerForm(wtforms.Form):
     content = wtforms.StringField(validators=[length(min=1)])
+
+class ChangeForm(wtforms.Form):
+    username = wtforms.StringField(validators=[length(min=3, max=20)])
+    email = wtforms.StringField(validators=[email()])
+    password = wtforms.StringField(validators=[length(min=6, max=20)])
+    password_change = wtforms.StringField(validators=[length(min=6, max=20)])
+
+class ChangeNameForm(wtforms.Form):
+    username = wtforms.StringField(validators=[length(min=3, max=20)])
+    email = wtforms.StringField(validators=[email()])
+

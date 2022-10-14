@@ -4,9 +4,9 @@ import string
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify, session,flash
 from exts import mail, db
 from flask_mail import Message
-from models import EmailCaptchaModel, UserModel
+from models import EmailCaptchaModel, UserModel, ForumModel
 from datetime import datetime
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, ChangeForm, ChangeNameForm
 from werkzeug.security import generate_password_hash, check_password_hash
 
 bp = Blueprint("user", __name__, url_prefix="/user")
@@ -16,7 +16,6 @@ bp = Blueprint("user", __name__, url_prefix="/user")
 def login():
     if request.method == "GET":
         return render_template("login.html")
-        print("sd")
     else:
         form = LoginForm(request.form)
         if form.validate():
@@ -24,9 +23,8 @@ def login():
             password = form.password.data
             user = UserModel.query.filter_by(email=email).first()
             if user and check_password_hash(user.password, password):
-                print("ss")
                 session['user_id'] = user.id
-                return redirect("/forum")
+                return redirect("/")
 
             else:
                 flash("The email and password do not match")
@@ -58,7 +56,6 @@ def register():
         else:
             return redirect(url_for("user.register"))
     else:
-        print("11111")
         return render_template("register.html")
 
 
@@ -84,7 +81,55 @@ def get_captcha():
             captcha_mod = EmailCaptchaModel(email=email, captcha=captcha)
             db.session.add(captcha_mod)
             db.session.commit()
-        print(captcha)
         return jsonify({"code": 200})
     else:
         return jsonify({"code": 400, "message": "Please enter your email first"})
+
+@bp.route("/change", methods=['POST','GET'])
+def user_change():
+    if request.method == 'POST':
+        form = ChangeForm(request.form)
+        form_name = ChangeNameForm(request.form)
+        if form_name.validate():
+            if form.validate():
+                email = form.email.data
+                username = form.username.data
+                password = form.password.data
+                hash_password = generate_password_hash(password)
+                user = UserModel.query.filter_by(email=email).first()
+                if user and check_password_hash(user.password, password):
+                    UserModel.query.filter_by(email=email).update({'password': hash_password})
+                    UserModel.query.filter_by(email=email).update({'username': username})
+                db.session.commit()
+                flash("Change success")
+                return redirect(url_for("user.centre", user_id=user.id))
+            else:
+                email = form.email.data
+                username = form.username.data
+                user = UserModel.query.filter_by(email=email).first()
+
+                if user:
+                    UserModel.query.filter_by(email=email).update({'username': username})
+                    db.session.commit()
+                print(user.id)
+                return redirect(url_for("user.centre", user_id = user.id))
+    else:
+        form = ChangeForm(request.form)
+        email = form.email.data
+        user = UserModel.query.filter_by(email=email).first()
+        return render_template("personalspace.html",user_id = user.id)
+
+
+@bp.route("/centre/<int:user_id>")
+def centre(user_id):
+    information = UserModel.query.get(user_id)
+    return render_template("personalspace.html", information=information)
+
+@bp.route("/blog/<int:author_id>", methods=['POST','GET'])
+def blog_personal(author_id):
+    print(author_id)
+    information = UserModel.query.get(author_id)
+    questions = ForumModel.query.filter(ForumModel.author_id==author_id)
+    print(questions)
+    return render_template("personalblog.html", questions=questions, information=information)
+
