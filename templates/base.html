@@ -31,7 +31,7 @@
                 <a class="nav-link" href="{{ url_for('forum.forum') }}">COMMUNITY</a>
                 </li>
             </ul>
-        # Top navigation bar
+{#        # Top navigation bar#}
             {##}
             {#        <div class="collapse navbar-collapse" id="navbarSupportedContent">#}
             {#            <ul class="navbar-nav mr-auto">#}
@@ -79,14 +79,15 @@
                         <a class="nav-link" href="{{ url_for('user.register') }}">注册</a>
                     </li>
                 {% endif %}
-            # Top navigation bar
+{#            # Top navigation bar#}
             </ul>
         </div>
     </div>
 </nav>
 <div class="container">
     {% block body %}{% endblock %}
-# Standard background
+{## Standard background#}
 </div>
 </body>
+
 </html>

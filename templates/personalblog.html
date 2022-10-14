@@ -1,6 +1,5 @@
 {% extends "new.html" %}
 <!DOCTYPE html>
-<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
 <html lang="en" dir="ltr">
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
@@ -9,17 +8,15 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='css/login.css') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='css/blog.css') }}">
     <meta charset="UTF-8">
-    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="{{ url_for('static',filename='css/bar.css') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='css/person.css') }}">
-    <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% endblock %}
 
 
 {% block body %}
-    # Left navigation bar
+{#    # Left navigation bar#}
     <div class="sidebar">
         <div class="logo-details">
             <div class="logo_name">WeChess</div>
@@ -83,7 +80,7 @@
             </li>
         </ul>
     </div>
-    # Displays posts by logged-in users
+{#    # Displays posts by logged-in users#}
     <section class="home-section">
     <div class="row" >
     <div class="col"></div>
