@@ -1,0 +1,7 @@
+style.css
+* {
+    margin: 0px;/*设置四周边距都为0*/
+    box-sizing: border-box;/*宽高的设置值包括border等*/
+}
+
+body {margin:0;padding:0;line-height:1.5em;font-family:"Times New Roman",Times,serif;font-size:14px;color:#000000;background:#f2e7ca url(images/templatemo_body.jpg) top center no-repeat;}
