@@ -17,11 +17,11 @@
 
 
 {% block body %}
-#Displays posts by logged-in users
+{##Displays posts by logged-in users#}
     <div class="sidebar">
         <div class="logo-details">
-            <i class='bx bxl-c-plus-plus icon'></i>
             <div class="logo_name">WeChess</div>
+            <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list">
             <li>
@@ -86,16 +86,16 @@
         <div class="split-screen">
             <div class="split-screen__half">
                 <div class="card">
-                    <div class="card-img"></div>
-                    <div class="card-info">
-                        <p class="text-title">{{ information.username }}</p>
+                    <div class="card-img" ></div>
+                    <div class="card-info" >
+                        <p class="text-title" type="file">{{ information.username }}</p>
                         <p class="text-level">Level: King</p>
                         <p class="text-body">You know what I'm made of. Why don't you find me?</p>
 
                     </div>
                 </div>
             </div>
-            # Personal information
+{#            # Personal information#}
             <!-- Right content -->
             <div class="split-screen__half">
                 <div class="row" style="margin-top: 250px;">
@@ -115,6 +115,8 @@
                                     <label for="exampleInputEmail1">User Name</label>
                                     <input type="text" class="form-control" name="username" value={{ information.username }}>
                                 </div>
+
+
 
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Confirm Password</label>

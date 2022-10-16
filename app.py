@@ -4,7 +4,7 @@ from flask_migrate import Migrate
 from exts import db, mail
 from blueprints import user_bp
 from blueprints import forum_bp
-from blueprints import index_bp
+from blueprints import index_bp,play_bp
 from models import UserModel
 from config import Config
 import config
@@ -21,7 +21,9 @@ migrate = Migrate(app, db)
 app.register_blueprint(user_bp)
 app.register_blueprint(forum_bp)
 app.register_blueprint(index_bp)
+app.register_blueprint(play_bp)
 # Registered blueprint
+
 
 @app.before_request
 def before_request():

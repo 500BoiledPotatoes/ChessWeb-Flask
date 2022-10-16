@@ -1,9 +1,12 @@
+import os
 import random
 import string
 
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify, session,flash
 from sqlalchemy import or_
+from werkzeug.utils import secure_filename
 
+from config import Config
 from exts import mail, db
 from flask_mail import Message
 from models import EmailCaptchaModel, UserModel, ForumModel
@@ -33,7 +36,7 @@ def login():
             else:
                 flash("The email and password do not match")
                 return redirect(url_for("user.login"))
-            # Password error redirects to login screen
+            # Password error redirects to log in screen
         else:
             flash("The email and password formats are incorrect")
             return redirect(url_for("user.login"))
@@ -46,10 +49,13 @@ def logout():
     return redirect(url_for('user.login'))
 # User logout
 
+
+
 @bp.route("/register", methods=['GET', 'POST'])
 def register():
     if request.method == "POST":
         form = RegisterForm(request.form)
+        print(form)
         if form.validate():
             email = form.email.data
             username = form.username.data
@@ -123,7 +129,7 @@ def user_change():
                     UserModel.query.filter_by(email=email).update({'username': username})
                     db.session.commit()
                 return redirect(url_for("user.centre", user_id = user.id))
-            # Only the user name is changed
+            # Only the username is changed
     else:
         form = ChangeForm(request.form)
         email = form.email.data
@@ -152,4 +158,5 @@ def search(author_id):
     questions =ForumModel.query.filter(or_(ForumModel.title.contains(q),ForumModel.content.contains(q))).order_by(db.text("-create_time"))
     return render_template("personalblog.html", questions=questions, information=information)
 # Search for posts by keyword
+
 
