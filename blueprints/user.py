@@ -4,7 +4,6 @@ import string
 
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify, session,flash
 from sqlalchemy import or_
-from werkzeug.utils import secure_filename
 
 from config import Config
 from exts import mail, db

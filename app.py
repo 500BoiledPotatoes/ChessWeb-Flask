@@ -4,7 +4,8 @@ from flask_migrate import Migrate
 from exts import db, mail
 from blueprints import user_bp
 from blueprints import forum_bp
-from blueprints import index_bp,play_bp
+from blueprints import index_bp
+from blueprints import play_bp
 from models import UserModel
 from config import Config
 import config
@@ -56,4 +57,4 @@ def hello_world():  # put application's code here
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=8080)

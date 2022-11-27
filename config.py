@@ -26,3 +26,4 @@ MAIL_USERNAME = "344482899@qq.com"
 MAIL_PASSWORD = "ebkflhviwvsecbcj"
 MAIL_DEFAULT_SENDER = "344482899@qq.com"
 # Connecting the Mailbox platform
+
