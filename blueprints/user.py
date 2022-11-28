@@ -110,22 +110,28 @@ def user_change():
                 email = form.email.data
                 username = form.username.data
                 password = form.password.data
+                signature = form.signature.data
                 hash_password = generate_password_hash(password)
                 user = UserModel.query.filter_by(email=email).first()
                 if user and check_password_hash(user.password, password):
                     UserModel.query.filter_by(email=email).update({'password': hash_password})
                     UserModel.query.filter_by(email=email).update({'username': username})
+                if user:
+                    UserModel.query.filter_by(email=email).update({'signature': signature})
+                    print("yes")
                 db.session.commit()
                 flash("Change success")
                 return redirect(url_for("user.centre", user_id=user.id))
             # To change the password, enter the correct old password
+
             else:
                 email = form.email.data
                 username = form.username.data
+                sign = form.signature.data
                 user = UserModel.query.filter_by(email=email).first()
-
                 if user:
                     UserModel.query.filter_by(email=email).update({'username': username})
+                    UserModel.query.filter_by(email=email).update({'signature': sign})
                     db.session.commit()
                 return redirect(url_for("user.centre", user_id = user.id))
             # Only the username is changed
@@ -143,6 +149,11 @@ def centre(user_id):
     return render_template("personalspace.html", information=information)
 # Displays basic user information
 
+@bp.route("/analytics/<int:user_id>")
+def analytics(user_id):
+    information = UserModel.query.get(user_id)
+    return render_template("analytics.html", information=information)
+# Visualization of user data
 @bp.route("/blog/<int:author_id>", methods=['POST','GET'])
 def blog_personal(author_id):
     information = UserModel.query.get(author_id)

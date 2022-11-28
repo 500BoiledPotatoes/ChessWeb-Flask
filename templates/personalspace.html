@@ -51,7 +51,7 @@
                 <span class="tooltip">Blog</span>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ url_for('user.analytics', user_id = information.id)}} }}">
                     <i class='bx bx-pie-chart-alt-2'></i>
                     <span class="links_name">Analytics</span>
                 </a>
@@ -85,12 +85,24 @@
         <!-- left content -->
         <div class="split-screen">
             <div class="split-screen__half">
-                <div class="card">
+                <div class="card" >
                     <div class="card-img" ></div>
                     <div class="card-info" >
                         <p class="text-title" type="file">{{ information.username }}</p>
-                        <p class="text-level">Level: King</p>
-                        <p class="text-body">You know what I'm made of. Why don't you find me?</p>
+                    <div class="if/else">
+                    {% if information.chess_win <= 3%}
+                        <p class="text-level">Level: Pawn</p>
+                    {% elif information.chess_win == 4%}
+                        <p class="text-level">Level: horse</p>
+                    {% elif information.chess_win == 5%}
+                        <p class="text-level">Level: Bishop</p>
+                    {% elif information.chess_win == 6%}
+                        <p class="text-level">Level: Queen</p>
+                    {% elif information.chess_win >= 7%}
+                        <p class="text-level">Level: Pawn</p>
+                    {% endif %}
+                    </div>
+                        <p class="text-body">{{ information.signature }}</p>
 
                     </div>
                 </div>
@@ -98,7 +110,7 @@
 {#            # Personal information#}
             <!-- Right content -->
             <div class="split-screen__half">
-                <div class="row" style="margin-top: 250px;">
+                <div class="row" style="margin-top:300px;">
                     <div class="col">
                         <form method="POST" , action="{{ url_for('user.user_change') }}">
                                 <div class="form-group">
@@ -106,9 +118,7 @@
                                     <input type="email" class="form-control" id="exampleInputEmail1"
                                            aria-describedby="emailHelp"
                                            name="email" value={{ information.email }} readonly=“readonly”>
-                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with
-                                        anyone
-                                        else.</small>
+                                    <small id="emailHelp" class="form-text text-muted"></small>
                                 </div>
 
                                 <div class="form-group">
@@ -116,9 +126,7 @@
                                     <input type="text" class="form-control" name="username" value={{ information.username }}>
                                 </div>
 
-
-
-                                <div class="form-group">
+                            <div class="form-group">
                                     <label for="exampleInputPassword1">Confirm Password</label>
                                     <input type="password" class="form-control" id="exampleInputPassword1"
                                            name="password">
@@ -128,6 +136,11 @@
                                     <input type="password" class="form-control" id="exampleInputPassword"
                                            name="password_change" >
                                 </div>
+                            <div class="form-group">
+                                    <label for="exampleInputEmail1">User Name</label>
+                                    <input type="text" class="form-control" id="signature" name="signature" value={{ information.signature }}>
+                                </div>
+
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
                         </form>
                     </div>
@@ -137,6 +150,7 @@
             </div>
         </div>
     </section>
+
     <script>
         let sidebar = document.querySelector(".sidebar");
         let closeBtn = document.querySelector("#btn");

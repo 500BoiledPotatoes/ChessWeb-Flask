@@ -3,16 +3,65 @@
 {% block title %}{% endblock %}
 
 {% block head %}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
     <link rel="stylesheet" href="{{ url_for('static',filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/play.css') }}">
 
 {% endblock %}
 
 {% block body %}
-    <div class="container text-center">
-        <div class="row justify-content-md-center">
-            <div class="col-md-auto p-5">
-                <a class="btn btn-primary btn-lg" href="/play/chess" role="button">Chess</a>
+{#    <div class="container text-center">#}
+{#        <div class="row justify-content-md-center">#}
+{#            <div class="col-md-auto p-5">#}
+{#                <a class="btn btn-primary btn-lg" href="/play/chess" role="button">Chess</a>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+    <div class="container1">
+        <div class="card">
+
+            <a href="/play/chess">
+            <div class="imgBx">
+                <img src="{{ url_for('static',filename='images/chess.png') }}">
+            </div>
+            </a>
+            <div class="content">
+                <h2>CHESS</h2>
+                <p>
+                    Chess is a two-player board game. The checkerboard is a square, composed of 64 black and white (dark and light) grids; The chess pieces are divided into black and white (dark and light) two sides, a total of 32 pieces, each side 16 pieces
+                </p>
             </div>
         </div>
+        <div class="card">
+            <a href="">
+            <div class="imgBx">
+                <img src="{{ url_for('static',filename='images/wuzi.jpg') }}" alt="">
+            </div>
+            </a>
+            <div class="content">
+                <h2>GOBANG</h2>
+                <p>
+                    Gobang originated in China. The two sides use black and white pieces, respectively, and play on the cross point of the straight line and the horizontal line of the chessboard
+                </p>
+            </div>
+        </div>
+{#        <div class="card">#}
+{#            <div class="imgBx">#}
+{#                <img src="p3.png" alt="">#}
+{#            </div>#}
+{#            <div class="content">#}
+{#                <h2>Card Three</h2>#}
+{#                <p>#}
+{#                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.#}
+{#                Sapiente recusandae, voluptatibus magnam reprehenderit a numquam.#}
+{#                Temporibus esse sit provident quaerat quae.#}
+{#                </p>#}
+{#            </div>#}
+{#        </div>#}
     </div>
+
+
+
+
 {% endblock %}

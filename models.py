@@ -16,6 +16,7 @@ class UserModel(db.Model):
     email = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(200), nullable=False, unique=True)
     join_time = db.Column(db.DateTime, default=datetime.now)
+    signature = db.Column(db.String(200), nullable=True)
     icon = db.Column(db.String(100))
     chess_win = db.Column(db.Integer, default=0)
     chess_lose = db.Column(db.Integer, default=0)

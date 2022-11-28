@@ -54,10 +54,16 @@ class ChangeForm(wtforms.Form):
     email = wtforms.StringField(validators=[email()])
     password = wtforms.StringField(validators=[length(min=6, max=20)])
     password_change = wtforms.StringField(validators=[length(min=6, max=20)])
+    signature = wtforms.StringField(validators=[length(min=0, max=20)])
     # A form for modifying user information
 
 class ChangeNameForm(wtforms.Form):
     username = wtforms.StringField(validators=[length(min=3, max=20)])
     email = wtforms.StringField(validators=[email()])
     # A form for modifying user names
+
+class ChangeSignForm(wtforms.Form):
+    signature = wtforms.StringField(validators=[length(min=0, max=20)])
+    email = wtforms.StringField(validators=[email()])
+    # A form for modifying signature
 
