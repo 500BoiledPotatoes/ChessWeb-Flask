@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, url_for, redirect, render_template, session, g
-from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import column
 from flask_migrate import Migrate
 from exts import db, mail
 from blueprints import user_bp

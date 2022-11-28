@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block title %}
-    注册
 
 {% endblock %}
 
@@ -20,20 +19,20 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                           name="email">
+                           name="email" required oninvalid="setCustomValidity('Please enter your message!');" oninput="setCustomValidity('');">
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
                         else.</small>
                 </div>
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">User Name</label>
-                    <input type="text" class="form-control" name="username">
+                    <input type="text" class="form-control" name="username" required oninvalid="setCustomValidity('Please enter your message!');" oninput="setCustomValidity('');">
                 </div>
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Verification code</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="captcha">
+                        <input type="text" class="form-control" name="captcha" required oninvalid="setCustomValidity('Please enter your message!');" oninput="setCustomValidity('');">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" id="captcha-btn">TestGetCode</button>
                         </div>
@@ -42,11 +41,11 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                    <input type="password" class="form-control" id="exampleInputPassword1" name="password" required oninvalid="setCustomValidity('Please enter your message!');" oninput="setCustomValidity('');">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Confirm Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword" name="password_confirm">
+                    <input type="password" class="form-control" id="exampleInputPassword" name="password_confirm" required oninvalid="setCustomValidity('Please enter your message!');" oninput="setCustomValidity('');">
                 </div>
 {#                <div class="form-group form-check">#}
 {#                    <input type="checkbox" class="form-check-input" id="exampleCheck1">#}
