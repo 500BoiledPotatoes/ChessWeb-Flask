@@ -313,7 +313,7 @@ function game() {
         }
     }
 
-    // botChess()
+    // Chess Bot
 
     function botChess() {
         for (let i = 0; i < 1000; i++) {
