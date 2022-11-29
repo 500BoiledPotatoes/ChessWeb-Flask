@@ -1,0 +1,197 @@
+{% extends "loggedin_base.html" %}
+
+{% block content %}
+	<form action="" method="post" novalidate>
+	{{ form.hidden_tag() }}
+		<p>
+            {{ form.xy.label }}<br>
+            {{ form.xy(size=300) }}
+        </p>
+		
+		<p>{{ form.submit() }}</p>
+	</form>
+	<p id="h">{{g}}</p>
+	<p id="k">{{player}}</p>
+    <canvas width="450" height="450"></canvas>
+    <script type="text/javascript">
+		let m = document.querySelector('#h');
+		let s = m.textContent;
+		let player = document.querySelector('#k').textContent;
+        let myCanvas = document.querySelector('canvas');
+        let ctx = myCanvas.getContext('2d');
+        //创建一个变量用于描述网格大小
+        let gridSize = 30;
+        //创建一个变量来表示当前是黑棋落子还是白棋落子
+        let iswho = true;       //默认第一次黑棋落子
+        //创建一个变量来控制游戏逻辑
+        let gameover = false;
+        //创建一个数组来表示整个棋盘 15*15 
+        let chessboard = [];
+		
+        for(let y = 0; y < myCanvas.height / gridSize ; y ++){
+            //先创建15行
+            chessboard[y] = [];
+            for(let x = 0; x < myCanvas.width / gridSize; x ++){
+                //利用循环给每一行创建15列,每列的初始化值都为0
+                chessboard[y][x] = 0;
+            }
+        }
+
+        //统计当前棋盘一共有多少种赢法
+        //创建变量计数
+        let count = 0;
+
+        //创建一个记录所有赢法的数组
+        let wins = [];
+        for(let y = 0 ; y < 15 ; y ++){
+            wins[y] = [];
+            for(let x = 0 ; x < 15 ; x++){
+                wins[y][x] = [];
+            }
+        }
+
+        //统计所有水平方向的赢法
+        for(let y = 0 ; y < 15 ; y ++){
+            for(let x = 0; x < 11; x++){
+                for(let k = 0; k < 5 ; k++){
+                    //在这个位置标记一下，表示一种赢法
+                    wins[y][x + k][count] = true;
+                    // 0   0   0
+                    // 0   1   0
+                    // 0   2   0
+                    // 0   3   0
+                    // 0   4   0
+                    //
+                    // 0   1   1
+                    // 0   2   1
+                    // 0   3   1
+                    // 0   4   1
+                    // 0   5   1
+                }
+                //每记录一次赢法加一
+                count++;
+            }
+        }
+
+        //记录纵向的赢法
+        for(let y = 0 ; y < 11; y++){
+            for(let x = 0 ; x < 15 ; x ++){
+                for(let k = 0 ;k < 5 ; k++){
+                    wins[y+k][x][count] = true;
+                }
+                count ++;
+            }
+        }
+        //记录斜边的赢法
+        for(let y = 0 ; y < 11 ; y ++){
+            for(let x = 0 ;x < 11; x ++){
+                for(let k = 0; k < 5 ; k++){
+                    wins[y + k][x +k][count] = true;
+                }
+                count ++;
+            }
+        }
+        //记录反斜边的赢法
+        for(let y = 14; y >= 4 ; y--){
+            for(let x = 0 ; x < 11; x ++){
+                for(let k = 0; k < 5 ; k++){
+                    // console.log((y - k) + ", " + (x + k)+ " , ");
+                    wins[y - k][x + k][count] = true;
+                }
+                count++;
+            }
+        }
+        console.log("整个游戏中一共有多少中赢法：" + count);
+
+        //创建两个变量来表示电脑及玩家在这些赢法上的落子
+        let playerWins = [];
+        let computerWins = [];
+        for(let i = 0 ; i < count ; i++){
+            //给玩家在每一种赢法上设置落子数为0
+            playerWins[i] = 0;
+            computerWins[i] = 0;
+        }
+
+        //设置棋盘的描边颜色
+        ctx.strokeStyle = "#666";
+        //利用循环绘制网格
+        for(let i = 0; i < myCanvas.width / gridSize; i++){     //循环15次
+            //绘制横向的线条
+            ctx.beginPath();
+            ctx.moveTo(0 + gridSize/2, i*gridSize + gridSize/2);
+            //横向线条宽度为整个画布宽度，高度位置与当前的格子有关
+            ctx.lineTo(myCanvas.width - gridSize/2, i*gridSize + gridSize/2);
+            ctx.stroke();
+
+            //绘制纵向的线条
+            ctx.beginPath();
+            ctx.moveTo(i*gridSize + gridSize/2, 0 + gridSize/2);
+            ctx.lineTo(i*gridSize + gridSize/2, myCanvas.height - gridSize/2);
+            ctx.stroke()
+
+        }
+		// x y 是棋盘坐标
+        function drawChessPieces(x, y,mode,p){
+			if(mode){
+            if(chessboard[y][x] !== 0){     //如果棋盘上的坐标值不为0
+                alert("当前位置已经有棋子了，请重新落子");
+                return;
+            }
+			}
+            //此时的x,y相对棋盘的坐标，转成相对画布的
+            let canvas_x = gridSize * x + gridSize/2;
+            let canvas_y = gridSize * y + gridSize/2;
+            ctx.beginPath();
+            ctx.arc(canvas_x , canvas_y , 13, 0, Math.PI*2);
+            //设置渐变范围
+            let g = ctx.createRadialGradient(canvas_x , canvas_y, 13, canvas_x, canvas_y ,0);
+
+            if(p=='1'){
+                //使用颜色
+                //设置渐变的颜色
+                g.addColorStop(0, "#0a0a0a");   //给第一个圆设置颜色
+                g.addColorStop(1, "#f9f9f9");   //给第二个圆设置颜色
+                ctx.fillStyle = g;
+                //黑棋落子,在对应位置记录一个1
+                chessboard[y][x] = 1;
+
+            }else {
+                //设置渐变的颜色
+                g.addColorStop(0, "#999999");
+                g.addColorStop(1, "#fafafa");
+                ctx.fillStyle = g;
+                //黑棋落子,在对应位置记录一个2
+                chessboard[y][x] = 2;
+            }
+            ctx.fill();
+            //切换下棋者
+        }
+		let i = 0;
+		for(let x = 0; x <	15 ; x ++){
+            //先创建15行
+            for(let y = 0; y < 15; y ++){
+                //利用循环给每一行创建15列,每列的初始化值都为0
+                chessboard[x][y] = parseInt(s.charAt(i))
+				if(chessboard[x][y]==1){
+					drawChessPieces(y,x,false,'1')}
+				if(chessboard[x][y]==2){
+					drawChessPieces(y,x,false,'2')}
+				i++;
+            }
+        }
+        //给画布绑定点击事件
+        myCanvas.onclick = function(event){
+			//点击坐标化成棋盘坐标
+            let x = Math.floor(event.offsetX / gridSize);
+            let y = Math.floor(event.offsetY / gridSize);
+            //调用刚刚编写的绘制棋子的函数，传入相对棋盘的坐标
+			drawChessPieces(x ,y,true,player);
+			let loc = document.querySelector('#xy');
+			loc.value = y+" "+x;
+        };
+	
+    </script>
+
+{% endblock %}
+
+

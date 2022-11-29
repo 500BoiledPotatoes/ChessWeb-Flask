@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发送ajax get请求</title>
+</head>
+<body>
+<script type="text/javascript">
+    window.onload = function () {
+        document.getElementById("btn").onclick = function () {
+            //1. 创建AJAX核心对象
+            var xhr = new XMLHttpRequest();
+            //2. 注册回调函数
+            xhr.onreadystatechange = function(){
+                if (this.readyState == 4) {
+                    if (this.status == 200) {
+                        // 通过XMLHttpRequest对象的responseText属性可以获取到服务器响应回来的内容。
+                        // 并且不管服务器响应回来的是什么，都以普通文本的形势获取。（服务器可能响应回来：普通文本、XML、JSON、HTML...）
+                        // innerHTML属性是javascript中的语法，和ajax的XMLHttpRequest对象无关。
+                        // innerHTML可以设置元素内部的HTML代码。（innerHTML可以将后面的内容当做一段HTML代码解释并执行）
+                        //document.getElementById("myspan").innerHTML = this.responseText
+                        document.getElementById("myp").textContent = this.responseText
+                        //  innerText也不是AJAX中的，是javascript中的元素属性，和XMLHttpRequest无关。
+                        // innerText也是设置元素中的内容，但是即使后面是一段HTML代码，也是将其看做一个普通字符串设置进去。
+                        //document.getElementById("myspan").innerText = this.responseText
+                    }else{
+                        alert(this.status)
+                    }
+                }
+            }
+            //3. 开启通道
+            xhr.open("GET", "/ajax", true)
+            //4. 发送请求
+            xhr.send()
+        }
+    }
+</script>
+<button id="btn">发送ajax get请求</button>
+<p id="myp"></p>
+<div id="mydiv"></div>
+</body>
+</html>
