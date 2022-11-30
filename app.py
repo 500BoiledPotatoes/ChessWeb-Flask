@@ -6,6 +6,7 @@ from blueprints import user_bp
 from blueprints import forum_bp
 from blueprints import index_bp
 from blueprints import play_bp
+from blueprints import book_bp
 from models import UserModel
 from config import Config
 import config
@@ -23,6 +24,7 @@ app.register_blueprint(user_bp)
 app.register_blueprint(forum_bp)
 app.register_blueprint(index_bp)
 app.register_blueprint(play_bp)
+app.register_blueprint(book_bp)
 # Registered blueprint
 
 

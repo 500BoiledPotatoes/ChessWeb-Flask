@@ -21,6 +21,17 @@ class UserModel(db.Model):
     chess_win = db.Column(db.Integer, default=0)
     chess_lose = db.Column(db.Integer, default=0)
 # Table of user info
+
+class BookModel(db.Model):
+    __tablename__='book'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    type = db.Column(db.String(10))
+    title = db.Column(db.String(100))
+    publisher = db.Column(db.String(20))
+    year = db.Column(db.Integer)
+    author = db.Column(db.String(100))
+    uploader_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    uploader = db.relationship("UserModel",backref="book")
 class ForumModel(db.Model):
     __tablename__ = "forum"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

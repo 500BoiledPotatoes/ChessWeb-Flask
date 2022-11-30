@@ -17,16 +17,18 @@
         <div class="col">
             <form method="POST", action="{{ url_for('user.register') }}">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                           name="email" required oninvalid="setCustomValidity('Please enter your message!');" oninput="setCustomValidity('');">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                        else.</small>
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                           name="email" >
+                    <span style="color: #1e7e34; display: none" id="email_correct">Correct</span>
+                    <span style="color: #bd2130; display: none" id="email_incorrect">Please enter the correct email format</span>
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">User Name</label>
-                    <input type="text" class="form-control" name="username" required oninvalid="setCustomValidity('Please enter your message!');" oninput="setCustomValidity('');">
+                    <label for="username">User Name</label>
+                    <input type="text" class="form-control" id="username" name="username">
+                    <span style="color: #1e7e34; display: none" id="username_correct">Correct</span>
+                    <span style="color: #bd2130; display: none" id="username_incorrect">Please enter a username of length 2 to 20</span>
                 </div>
 
                 <div class="form-group">
@@ -40,21 +42,68 @@
 
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" name="password" required oninvalid="setCustomValidity('Please enter your message!');" oninput="setCustomValidity('');">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" >
+                    <span style="color: #1e7e34; display: none" id="password_correct">Correct</span>
+                    <span style="color: #bd2130; display: none" id="password_incorrect">The password shall contain at least upper and lower case letters, numbers, and no less than 8 characters</span>
                 </div>
-{#                <div class="form-group">#}
-{#                    <label for="exampleInputPassword1">Confirm Password</label>#}
-{#                    <input type="password" class="form-control" id="exampleInputPassword" name="password_confirm" required oninvalid="setCustomValidity('Please enter your message!');" oninput="setCustomValidity('');">#}
-{#                </div>#}
-{#                <div class="form-group form-check">#}
-{#                    <input type="checkbox" class="form-check-input" id="exampleCheck1">#}
-{#                    <label class="form-check-label" for="exampleCheck1">Check me out</label>#}
-{#                </div>#}
+                <div class="form-group">
+                    <label for="password_confirm">Confirm Password</label>
+                    <input type="password" class="form-control" id="password_confirm" name="password_confirm">
+                    <span style="color: #1e7e34; display: none" id="password_confirm_correct">Correct</span>
+                    <span style="color: #bd2130; display: none" id="password_confirm_incorrect">The password entered twice is inconsistent</span>
+                </div>
                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
             </form>
         </div>
 
         <div class="col"></div>
     </div>
+    <script>
+
+        $('#email').keyup(function (){
+        let email = $('#email').val()
+        let re = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(.[a-zA-Z0-9_-]+)+$/;
+        if(re.test(email)){
+            $('#email_correct').css('display','inline')
+            $('#email_incorrect').css('display','none')
+        }else{
+            $('#email_correct').css('display','none')
+            $('#email_incorrect').css('display','inline')
+        }
+    })
+    $('#username').keyup(function (){
+        let username = $('#username').val()
+        if(username.length>=2 && username.length <=20){
+            $('#username_correct').css('display','inline')
+            $('#username_incorrect').css('display','none')
+        }else{
+            $('#username_correct').css('display','none')
+            $('#username_incorrect').css('display','inline')
+        }
+    })
+    $('#password').keyup(function (){
+        let passord = $('#password').val()
+        let re =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/;
+        if(re.test(passord)){
+            $('#password_correct').css('display','inline')
+            $('#password_incorrect').css('display','none')
+        }else{
+            $('#password_correct').css('display','none')
+            $('#password_incorrect').css('display','inline')
+        }
+    })
+        $('#password_confirm').keyup(function (){
+        let password_confirm = $('#password_confirm').val()
+        let passord = $('#password').val()
+
+        if(passord === password_confirm){
+            $('#password_confirm_correct').css('display','inline')
+            $('#password_confirm_incorrect').css('display','none')
+        }else{
+            $('#password_confirm_correct').css('display','none')
+            $('#password_confirm_incorrect').css('display','inline')
+        }
+    })
+    </script>
 {% endblock %}

@@ -27,7 +27,6 @@ class RegisterForm(wtforms.Form):
     def validate_email(self, field):
         email = field.data
         user_mod = UserModel.query.filter_by(email=email).first()
-        print("4")
         if user_mod:
             raise wtforms.ValidationError("An account with the same address already exists")
         # Verify Email entry
@@ -43,8 +42,6 @@ class ForumForm(wtforms.Form):
     title = wtforms.StringField(validators=[length(min=3, max=200)])
     content = wtforms.StringField(validators=[length(min=5)])
     #Forum Form
-
-
 class AnswerForm(wtforms.Form):
     content = wtforms.StringField(validators=[length(min=1)])
     # Comment form

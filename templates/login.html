@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-    登录
+    login
 
 {% endblock %}
 
@@ -17,16 +17,16 @@
         <div class="col">
             <form action="{{ url_for("user.login") }}" method="POST">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                           name="email" required oninvalid="setCustomValidity('Please enter your message!');" oninput="setCustomValidity('');">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                        else.</small>
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                           id="email" name="email" >
+                    <span style="color: #bd2130; display: none" id="email_incorrect">Please enter email</span>
 {#                    # Enter email#}
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" name="password" required oninvalid="setCustomValidity('Please enter your message!');" oninput="setCustomValidity('');">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                    <span style="color: #bd2130; display: none" id="password_incorrect">Please enter password</span>
                 </div>
 {#                <div class="form-group form-check">#}
 {#                    <input type="checkbox" class="form-check-input" id="exampleCheck1">#}
@@ -50,5 +50,27 @@
 
         <div class="col"></div>
     </div>
+    <script>
+
+        $('#email').keyup(function (){
+        let email = $('#email').val()
+        if(email != ""){
+            $('#email_incorrect').css('display','none')
+        }else{
+            $('#email_incorrect').css('display','inline')
+        }
+    })
+
+    $('#password').keyup(function (){
+        let passord = $('#password').val()
+        if(passord != ""){
+            $('#password_incorrect').css('display','none')
+        }else{
+            $('#password_incorrect').css('display','inline')
+        }
+    })
+
+    </script>
+
 
 {% endblock %}

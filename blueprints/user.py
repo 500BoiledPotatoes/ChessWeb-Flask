@@ -2,7 +2,7 @@ import os
 import random
 import string
 
-from flask import Blueprint, render_template, request, redirect, url_for, jsonify, session,flash
+from flask import Blueprint, render_template, request, redirect, url_for, jsonify, session, flash
 from sqlalchemy import or_
 
 from config import Config
@@ -29,7 +29,7 @@ def login():
             if user and check_password_hash(user.password, password):
                 # Verify that the username and password match
                 session['user_id'] = user.id
-                return redirect("/")
+                return redirect("/play")
             # After the verification is successful, the main screen is displayed
 
             else:
@@ -39,6 +39,8 @@ def login():
         else:
             flash("The email and password formats are incorrect")
             return redirect(url_for("user.login"))
+
+
 # The realization of the login function
 
 
@@ -46,15 +48,15 @@ def login():
 def logout():
     session.clear()
     return redirect(url_for('user.login'))
-# User logout
 
+
+# User logout
 
 
 @bp.route("/register", methods=['GET', 'POST'])
 def register():
     if request.method == "POST":
         form = RegisterForm(request.form)
-        print(form)
         if form.validate():
             email = form.email.data
             username = form.username.data
@@ -71,6 +73,8 @@ def register():
             return redirect(url_for("user.register"))
     else:
         return render_template("register.html")
+
+
 # Implementation of registration function
 
 @bp.route("/captcha", methods=['POST'])
@@ -99,8 +103,10 @@ def get_captcha():
     # Each new captcha is updated in the database
     else:
         return jsonify({"code": 400, "message": "Please enter your email first"})
+
+
 # Email verification code
-@bp.route("/change", methods=['POST','GET'])
+@bp.route("/change", methods=['POST', 'GET'])
 def user_change():
     if request.method == 'POST':
         form = ChangeForm(request.form)
@@ -133,13 +139,15 @@ def user_change():
                     UserModel.query.filter_by(email=email).update({'username': username})
                     UserModel.query.filter_by(email=email).update({'signature': sign})
                     db.session.commit()
-                return redirect(url_for("user.centre", user_id = user.id))
+                return redirect(url_for("user.centre", user_id=user.id))
             # Only the username is changed
     else:
         form = ChangeForm(request.form)
         email = form.email.data
         user = UserModel.query.filter_by(email=email).first()
-        return render_template("personalspace.html",user_id = user.id)
+        return render_template("personalspace.html", user_id=user.id)
+
+
 # Change a user's personal information
 
 
@@ -149,24 +157,21 @@ def centre(user_id):
     return render_template("personalspace.html", information=information)
 # Displays basic user information
 
-@bp.route("/analytics/<int:user_id>")
-def analytics(user_id):
-    information = UserModel.query.get(user_id)
-    return render_template("analytics.html", information=information)
-# Visualization of user data
-@bp.route("/blog/<int:author_id>", methods=['POST','GET'])
+
+@bp.route("/blog/<int:author_id>", methods=['POST', 'GET'])
 def blog_personal(author_id):
     information = UserModel.query.get(author_id)
-    questions = ForumModel.query.filter(ForumModel.author_id==author_id)
+    questions = ForumModel.query.filter(ForumModel.author_id == author_id)
     return render_template("personalblog.html", questions=questions, information=information)
+
+
 # Displays posts by the current user
 
 @bp.route("/search/<int:author_id>")
 def search(author_id):
     q = request.args.get("q")
     information = UserModel.query.get(author_id)
-    questions =ForumModel.query.filter(or_(ForumModel.title.contains(q),ForumModel.content.contains(q))).order_by(db.text("-create_time"))
+    questions = ForumModel.query.filter(or_(ForumModel.title.contains(q), ForumModel.content.contains(q))).order_by(
+        db.text("-create_time"))
     return render_template("personalblog.html", questions=questions, information=information)
 # Search for posts by keyword
-
-

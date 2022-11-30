@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}
+
+{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/index.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="jumbotron">
+  <h1 class="display-4">Hello, players!</h1>
+  <p class="lead">Here you can share books you think are useful to other players.</p>
+  <hr class="my-4">
+  <p style="font-size: 20px">Just share it!</p>
+        <div class="row clearfix">
+            <div class="col-md-2 column">
+                <h3 class="text-primary text-center">
+                </h3>
+                <ul class="nav flex-colomn nav-fill nav-pills justify-content-center">
+                                        <li class="nav-item-book" >
+                        <button onclick="window.location.href='{{ url_for('book.search') }}'" >Search</button>
+                    </li>
+                    <li class="nav-item-book" >
+                        <button onclick="window.location.href='{{ url_for('book.add') }}'" >Add</button>
+                    </li>
+                    <form action="{{ url_for('book.deleteAll') }}" method='post'>
+                            <button onclick="{if(confirm('Confirm the deletion?')){this.document.formname.submit();return true;}return false;}" >Delete</button>
+                    </form>
+                </ul>
+            </div>
+                    <div class="col-10">
+            <div class="row">
+                <div class="col-10">
+                    <div class="container">
+                        <h4 class="text-primary">
+                            <svg class="bi bi-file-earmark-text" width="1em" height="1em" viewBox="0 0 16 16"
+                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
+                                <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"></path>
+                                <path fill-rule="evenodd"
+                                      d="M5 11.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                            </svg>
+                        </h4>
+
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-10">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">TYPE</th>
+                            <th scope="col">TITLE</th>
+                            <th scope="col">PUBLISHER</th>
+                            <th scope="col">YEAR</th>
+                            <th scope="col">AUTHOR</th>
+                            <th scope="col">OPERATION</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for t in results %}
+                            <tr>
+                                <td>{{ t.type }}</td>
+                                <td>{{ t.title }}</td>
+                                <td>{{ t.publisher }}</td>
+                                <td>{{ t.year }}</td>
+                                <td>{{ t.author }}</td>
+                                <td><a href="{{ url_for('book.delete', book_id = t.id)}}">Delete</a></td>
+                            </tr>
+                        {% endfor %}
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}
