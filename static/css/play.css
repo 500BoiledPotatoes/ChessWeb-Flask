@@ -15,7 +15,7 @@
     padding: 30px;
 }
 
-.container .card{
+.container1 .card{
     margin-top: 100px;
     position: relative;
     max-width: 330px;
@@ -29,11 +29,11 @@
     transition: .3s ease-in-out;
 }
 
-.container .card:hover{
+.container1 .card:hover{
     height: 520px;
 }
 
-.container .card .imgBx{
+.container1 .card .imgBx{
     position: relative;
     width: 260px;
     height: 260px;
@@ -43,12 +43,12 @@
     box-shadow: 0 5px 20px rgba(0,0,0,0.2);
 }
 
-.container .card .imgBx img{
+.container1 .card .imgBx img{
     max-width: 100%;
     border-radius: 4px;
 }
 
-.container .card .content{
+.container1 .card .content{
     position: relative;
     margin-top: -140px;
     padding: 10px 15px;
@@ -59,7 +59,7 @@
     transition: .3s ease-in-out;
 }
 
-.container .card:hover .content{
+.container1 .card:hover .content{
     visibility: visible;
     opacity: 1;
     margin-top: -40px;

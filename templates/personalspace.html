@@ -25,12 +25,7 @@
         </div>
         <ul class="nav-list">
             <li>
-                <i class='bx bx-search'></i>
-                <input type="text" placeholder="Search...">
-                <span class="tooltip">Search</span>
-            </li>
-            <li>
-                <a href="#">
+                <a href="{{ url_for('user.navigation', user_id = information.id)}}">
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">Dashboard</span>
                 </a>
@@ -49,27 +44,6 @@
                     <span class="links_name">Blog</span>
                 </a>
                 <span class="tooltip">Blog</span>
-            </li>
-            <li>
-                <a href="{{ url_for('user.analytics', user_id = information.id)}} }}">
-                    <i class='bx bx-pie-chart-alt-2'></i>
-                    <span class="links_name">Analytics</span>
-                </a>
-                <span class="tooltip">Analytics</span>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-heart'></i>
-                    <span class="links_name">Saved</span>
-                </a>
-                <span class="tooltip">Saved</span>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-cog'></i>
-                    <span class="links_name">Setting</span>
-                </a>
-                <span class="tooltip">Setting</span>
             </li>
             <li>
                 <a href="/play">
@@ -142,7 +116,6 @@
                                 </div>
 
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                            <button type="button" class="btn btn-xs btn-danger" id="deleterecord" userid={{ information.id }}>Delete</button>
                         </form>
                     </div>
 

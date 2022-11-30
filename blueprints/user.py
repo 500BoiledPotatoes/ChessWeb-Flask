@@ -124,7 +124,6 @@ def user_change():
                     UserModel.query.filter_by(email=email).update({'username': username})
                 if user:
                     UserModel.query.filter_by(email=email).update({'signature': signature})
-                    print("yes")
                 db.session.commit()
                 flash("Change success")
                 return redirect(url_for("user.centre", user_id=user.id))
@@ -175,3 +174,8 @@ def search(author_id):
         db.text("-create_time"))
     return render_template("personalblog.html", questions=questions, information=information)
 # Search for posts by keyword
+@bp.route('/navigation/<int:user_id>')
+def navigation(user_id):
+    information = UserModel.query.get(user_id)
+    return render_template('dashboard.html', information=information)
+# dashboard navigation

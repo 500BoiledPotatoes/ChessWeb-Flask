@@ -1,10 +1,114 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "new.html" %}
 
-</body>
-</html>
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename= 'JQ/jquery.3.6.min.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'js/register.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/blog.css') }}">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/person.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/navigation.css') }}">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+
+
+{% block body %}
+{#    # Left navigation bar#}
+    <div class="sidebar">
+        <div class="logo-details">
+            <div class="logo_name">WeChess</div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav-list">
+
+            <li>
+                <a href="{{ url_for('user.navigation', user_id = information.id)}}">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="{{ url_for('user.centre', user_id = information.id) }}">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name">User</span>
+                </a>
+                <span class="tooltip">User</span>
+            </li>
+            <li>
+                <a href="{{ url_for('user.blog_personal', author_id = information.id) }}">
+                    <i class='bx bx-chat'></i>
+                    <span class="links_name">Blog</span>
+                </a>
+                <span class="tooltip">Blog</span>
+            </li>
+            <li>
+                <a href="/play">
+                    <i class='bx bx-log-out' id="log_out"></i>
+                    <span class="links_name">Out</span>
+                </a>
+                <span class="tooltip">Out</span>
+            </li>
+        </ul>
+    </div>
+{#    navigation#}
+    <div class="container">
+        <div class="card">
+            <a href="/play">
+            <div class="imgBx">
+                <img src="{{ url_for('static',filename='images/nav1.png') }}" alt="">
+            </div>
+               </a>
+            <div class="content">
+                <h2>PLAY</h2>
+            </div>
+        </div>
+        <div class="card">
+            <a href="/book">
+            <div class="imgBx">
+                <img src="{{ url_for('static',filename='images/nav2.png') }}" alt="">
+            </div>
+                </a>
+            <div class="content">
+                <h2>TUTORIAL</h2>
+            </div>
+        </div>
+        <div class="card">
+            <a href="/forum">
+            <div class="imgBx">
+                <img src="{{ url_for('static',filename='images/nav3.png') }}" alt="">
+            </div>
+                </a>
+            <div class="content">
+                <h2>COMMUNITY</h2>
+            </div>
+        </div>
+    </div>
+    <script>
+        let sidebar = document.querySelector(".sidebar");
+        let closeBtn = document.querySelector("#btn");
+        let searchBtn = document.querySelector(".bx-search");
+
+        closeBtn.addEventListener("click", () => {
+            sidebar.classList.toggle("open");
+            menuBtnChange();//calling the function(optional)
+        });
+
+        searchBtn.addEventListener("click", () => { // Sidebar open when you click on the search iocn
+            sidebar.classList.toggle("open");
+            menuBtnChange(); //calling the function(optional)
+        });
+
+        // following are the code to change sidebar button(optional)
+        function menuBtnChange() {
+            if (sidebar.classList.contains("open")) {
+                closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+            } else {
+                closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
+            }
+        }
+    </script>
+{% endblock %}
