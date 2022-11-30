@@ -16,6 +16,7 @@
             <div class="col-md-2 column">
                 <h3 class="text-primary text-center">
                 </h3>
+                {# The side button bar #}
                 <ul class="nav flex-colomn nav-fill nav-pills justify-content-center">
                                         <li class="nav-item-book" >
                         <button onclick="window.location.href='{{ url_for('book.search') }}'" >Search</button>
@@ -44,6 +45,7 @@
 
                     </div>
                 </div>
+            {# Show books that meet the criteria #}
                 <div class="clearfix"></div>
                 <div class="col-10">
                     <table class="table table-striped">

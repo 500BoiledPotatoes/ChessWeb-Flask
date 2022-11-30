@@ -57,7 +57,7 @@ function game() {
             //bot move
         }
     })
-
+    //Chess main function
     function playChess($grid) {
         let $fromChild = $(action.from.children(".chess")[0])
         let moveGrids = moveScope($fromChild)
@@ -133,7 +133,7 @@ function game() {
             }
             return scope
         }
-
+        //Rook Move
         if (piece.hasClass("knight")) {
             let centerGrid = piece.parent()
             let nearGrid, farGrid
@@ -160,7 +160,7 @@ function game() {
             }
             return scope
         }
-
+        // Knight Move
         if (piece.hasClass("bishop")) {
             let centerGrid = piece.parent()
             let tempGrid
@@ -179,7 +179,7 @@ function game() {
             }
             return scope
         }
-
+        // Bishop move
         if (piece.hasClass("queen")) {
             let centerGrid = piece.parent()
             let tempGrid
@@ -198,7 +198,7 @@ function game() {
             }
             return scope
         }
-
+        // Queen Move
         if (piece.hasClass("king")) {
             let centerGrid = piece.parent()
             let tempGrid
@@ -212,8 +212,9 @@ function game() {
             }
             return scope
         }
+        //King move
     }
-
+    //Piece attack mode
     function attackScope(piece) {
         let scope = []
         if (piece.hasClass("pawn")) {
@@ -225,6 +226,7 @@ function game() {
             }
             return scope
         }
+        // Pawn attack
         if (piece.hasClass("rook")) {
             let centerGrid = piece.parent()
             let directions = [top, right, bottom, left]
@@ -243,6 +245,7 @@ function game() {
             }
             return scope
         }
+        // Rook attack
         if (piece.hasClass("knight")) {
             let centerGrid = piece.parent()
             let nearGrid, farGrid
@@ -269,7 +272,7 @@ function game() {
             }
             return scope
         }
-
+        // Knight attack
         if (piece.hasClass("bishop")) {
             let centerGrid = piece.parent()
             let tempGrid
@@ -290,7 +293,7 @@ function game() {
             }
             return scope
         }
-
+        // Bishop attack
         if (piece.hasClass("queen")) {
             let centerGrid = piece.parent()
             let tempGrid
@@ -311,7 +314,7 @@ function game() {
             }
             return scope
         }
-
+        //Queen attack
         if (piece.hasClass("king")) {
             let centerGrid = piece.parent()
             let tempGrid
@@ -326,13 +329,15 @@ function game() {
 
             return scope
         }
+        //King attack
     }
 
     // Chess Bot
-
+    // Random move
     function botChess() {
         for (let i = 0; i < 1000; i++) {
-            if (action.currentPlayer && action.currentPlayer != "black") return
+            if (action.currentPlayer && action.currentPlayer != "black")
+                return
             let randomNum = parseInt(Math.random() * 15)
             let piece = $("div[color=black]")[randomNum]
             if (piece) {
@@ -368,7 +373,7 @@ function game() {
             })
         }
     }
-
+    //Keep records
     chessRange()
 
     function chessRange() {
@@ -376,7 +381,7 @@ function game() {
             doChessRange()
         }, 3000)
     }
-
+    //Update leaderboards regularly
     function doChessRange() {
         let h = `<li class="list-group-item d-flex justify-content-between align-items-center">
                  <span><span class="badge badge-primary badge-pill">{{win}}</span>
@@ -393,18 +398,18 @@ function game() {
             }
         })
     }
-
+    //Update ranking list
     function clearBeforeMove() {
         $(".grid").removeClass("active")
     }
-
+    //Uncheck
     function calculate(param1, param2, operation) {
         if (operation == "+")
             return param1 + param2
         if (operation == "-")
             return param1 - param2
     }
-
+    //Calculate the coordinates
     function attackDirection(piece) {
         if (piece.hasClass("pawn")) {
             let centerGrid = piece.parent()
@@ -413,7 +418,7 @@ function game() {
             return scope
         }
     }
-
+    //Pawn walk straight and eat sideways
     function getPosition(grid) {
         let gridId = $(grid).attr("id")
         let x = gridId[0]
@@ -421,27 +426,29 @@ function game() {
 
         return [x, y]
     }
+    //Get the position of the piece
 
     function isMarginTop(grid) {
         let position = getPosition(grid)
         return position[1] == yAxis[7]
     }
+    //Reach the top
 
     function isMarginBottom(grid) {
         let position = getPosition(grid)
         return position[1] == yAxis[0]
     }
-
+    //Reach the bottom
     function isMarginLeft(grid) {
         let position = getPosition(grid)
         return position[0] == xAxis[0]
     }
-
+    //Reach left
     function isMarginRight(grid) {
         let position = getPosition(grid)
         return position[0] == xAxis[7]
     }
-
+    //Reach Right
     function top(grid) {
         let position = getPosition(grid)
         if (isMarginTop(grid) == true) {
@@ -450,7 +457,7 @@ function game() {
             return $("#" + position[0] + (position[1] + 1))
         }
     }
-
+    // Move Up
     function bottom(grid) {
         let position = getPosition(grid)
         if (isMarginBottom(grid) == true) {
@@ -459,7 +466,7 @@ function game() {
             return $("#" + position[0] + (position[1] - 1))
         }
     }
-
+    // Move Down
     function left(grid) {
         let position = getPosition(grid)
         if (isMarginLeft(grid) == true) {
@@ -468,7 +475,7 @@ function game() {
             return $("#" + xAxis[xAxis.indexOf(position[0]) - 1] + position[1])
         }
     }
-
+    //Move left
     function right(grid) {
         let position = getPosition(grid)
         if (isMarginRight(grid) == true) {
@@ -477,7 +484,7 @@ function game() {
             return $("#" + xAxis[xAxis.indexOf(position[0]) + 1] + position[1])
         }
     }
-
+    //Move left
     function topLeft(grid) {
         let position = getPosition(grid)
         if (isMarginTop(grid) || isMarginLeft(grid)) {
@@ -486,7 +493,7 @@ function game() {
             return $("#" + xAxis[xAxis.indexOf(position[0]) - 1] + (position[1] + 1))
         }
     }
-
+    //Move up left
     function topRight(grid) {
         let position = getPosition(grid)
         if (isMarginTop(grid) || isMarginRight(grid)) {
@@ -495,7 +502,7 @@ function game() {
             return $("#" + xAxis[xAxis.indexOf(position[0]) + 1] + (position[1] + 1))
         }
     }
-
+    //Move up right
     function bottomLeft(grid) {
         let position = getPosition(grid)
         if (isMarginBottom(grid) || isMarginLeft(grid)) {
@@ -504,7 +511,7 @@ function game() {
             return $("#" + xAxis[xAxis.indexOf(position[0]) - 1] + (position[1] - 1))
         }
     }
-
+    //Move down left
     function bottomRight(grid) {
         let position = getPosition(grid)
         if (isMarginBottom(grid) || isMarginRight(grid)) {
@@ -513,6 +520,7 @@ function game() {
             return $("#" + xAxis[xAxis.indexOf(position[0]) + 1] + (position[1] - 1))
         }
     }
+    //Move down right
 }
 
 game()

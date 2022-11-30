@@ -5,11 +5,13 @@
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('static',filename='css/index.css') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='css/chess.css') }}">
-
+    <script src="/static/JQ/jquery.3.6.min.js"></script>
+    <script src="/static/bootstrap/bootstrap.4.6.1.min.js"></script>
+    <script src="/static/JQ/bot-chess.js"></script>
 {% endblock %}
 
 {% block body %}
-
+    {# Ranking list #}
     <div class="container p-3 board">
         <div class="row">
             <div class="col-sm-3">
@@ -30,6 +32,7 @@
                     </div>
                 </div>
             </div>
+            {# Initialize the black piece #}
             <div class="col-sm-7">
                 <div id="chessBoard" class="container">
                     <div class="row">
@@ -84,6 +87,7 @@
                             <div class="chess black pawn initial" color="black" type="pawn"></div>
                         </div>
                     </div>
+                    {# Initialize the checkerboard #}
                     <div class="row">
                         <div id="A6" class="col grid black"></div>
                         <div id="B6" class="col grid white"></div>
@@ -124,6 +128,7 @@
                         <div id="G3" class="col grid white"></div>
                         <div id="H3" class="col grid black"></div>
                     </div>
+                    {# Initialize the white piece #}
                     <div class="row">
                         <div id="A2" class="col grid black">
                             <div class="chess white pawn initial" color="white" type="pawn"></div>
@@ -182,6 +187,7 @@
                 <div class="container">
                     <div class="row">
                         <ul class="list-group">
+                            {# Display winner #}
                             <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-success">
                                 Winner
                             </li>
@@ -189,6 +195,7 @@
                                 In the game
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {# Restart game #}
                                 <button type="button" class="btn btn-primary btn-sm" onclick="location.reload ()">
                                     Restart
                                 </button>
@@ -200,8 +207,6 @@
         </div>
     </div>
 
-    <script src="/static/JQ/jquery.3.6.min.js"></script>
-    <script src="/static/bootstrap/bootstrap.4.6.1.min.js"></script>
-    <script src="/static/JQ/bot-chess.js"></script>
+
 
 {% endblock %}

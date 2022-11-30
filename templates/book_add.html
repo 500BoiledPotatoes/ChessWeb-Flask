@@ -16,6 +16,7 @@
             <div class="col-md-2 column">
                 <h3 class="text-primary text-center">
                 </h3>
+                {# The side button bar #}
                 <ul class="nav flex-colomn nav-fill nav-pills justify-content-center">
                                         <li class="nav-item-book" >
                         <button onclick="window.location.href='{{ url_for('book.search') }}'" >Search</button>
@@ -27,6 +28,7 @@
                             <button onclick="{if(confirm('Confirm the deletion?')){this.document.formname.submit();return true;}return false;}" >Delete</button>
                     </form>
                 </ul>
+
             </div>
                     <div class="col-10">
             <div class="row">
@@ -75,11 +77,12 @@
                         <label class="form-check-label" for="trainRadio">Gobang</label>
                     </div>
                 </div>
+                        {# Enter the added book information #}
                             {% for message in get_flashed_messages() %}
                     <div class="form-group">
                         <div class="text-danger">{{ message }}</div>
-
                     </div>
+                                {# Error message #}
                 {% endfor %}
                 <button type="submit" class="btn btn-fresh">Add</button>
             </form>
