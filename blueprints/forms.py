@@ -41,7 +41,7 @@ class RegisterForm(wtforms.Form):
 class ForumForm(wtforms.Form):
     title = wtforms.StringField(validators=[length(min=3, max=200)])
     content = wtforms.StringField(validators=[length(min=5)])
-    #Forum Form
+    # Forum form
 class AnswerForm(wtforms.Form):
     content = wtforms.StringField(validators=[length(min=1)])
     # Comment form

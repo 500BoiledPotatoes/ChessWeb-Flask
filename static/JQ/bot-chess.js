@@ -1,6 +1,7 @@
 function game() {
     const xAxis = ["A", "B", "C", "D", "E", "F", "G", "H"]
     const yAxis = [1, 2, 3, 4, 5, 6, 7, 8]
+    //Checkerboard coordinates
     let action = {
         "from": null,
         "to": "auto",
@@ -9,28 +10,39 @@ function game() {
         "botOwn": "black",
         "saveRecord": false
     }
+    //Initial game Setup
     $(".grid").click(function () {
-        if (checkWinner()) return
+        //Binding click events
+        if (checkWinner())
+            return
+        //Check the winner
         let $grid = $(this)
         if ($grid.children(".chess").length == 1) {
             clearBeforeMove()
             $grid.toggleClass("active")
+            //choose a piece
         }
-
         if (!action.from && !action.currentPlayer && $grid.children(".chess").length == 1) {
             let $child = $($grid.children(".chess")[0])
+            // console.log($child)
             if ($child.attr("color") == "white") {
                 action.from = $grid
                 action.currentPlayer = $child.attr("color")
+                // console.log($child.attr("color"))
+                // console.log($grid)
             }
             return
+            //Get the initial pieces and positions color
         } else if ($grid.children(".chess").length == 1) {
             let $child = $($grid.children(".chess")[0])
             if (action.currentPlayer == $child.attr("color")) {
                 action.from = $grid
+                // console.log($child)
                 return
+                //Get subsequent pieces
             } else {
                 clearBeforeMove()
+                //cancel move
             }
         }
 
@@ -41,6 +53,8 @@ function game() {
         if (action.currentPlayer == "white") {
             playChess($grid)
             botChess()
+            //player move
+            //bot move
         }
     })
 
@@ -51,15 +65,16 @@ function game() {
         let gridId = $grid ? $grid.attr("id") : null
         if (moveGrids.length == 0 && attackGrids.length == 0) {
             return
+            //Not move
         } else {
-            if ((!action.currentPlayer && action.to == "auto")
-                || (action.currentPlayer == action.botOwn && action.to == "auto")) {
+            if ((!action.currentPlayer && action.to == "auto") || (action.currentPlayer == action.botOwn && action.to == "auto")) {
                 gridId = attackGrids.length > 0 ? attackGrids[0] : moveGrids[0]
                 $grid = $("#" + gridId)
+                //Move
             }
         }
-
         if (gridId != action[2] && (moveGrids.indexOf(gridId) != -1 || attackGrids.indexOf(gridId) != -1)) {
+            console.log(moveGrids.indexOf(gridId))
             let $fromGrid = action.from
             let $toGrid = $grid
             clearBeforeMove()
@@ -79,17 +94,17 @@ function game() {
         action.winner = chessWinner()
         saveRecord()
         checkWinner()
-
     }
 
-
+    //The movement coordinates of different pieces
     function moveScope(piece) {
         let scope = []
         let position = getPosition(piece.parent())
-
+        //Get piece initial position
         if (piece.hasClass("pawn")) {
             let operate = piece.hasClass("white") ? "+" : "-"
             let $grid = $("#" + position[0] + (calculate(position[1], 1, operate)))
+            // calculate move
             if ($grid.children().length == 0) {
                 scope.push($grid.attr("id"))
             }
@@ -384,8 +399,10 @@ function game() {
     }
 
     function calculate(param1, param2, operation) {
-        if (operation == "+") return param1 + param2
-        if (operation == "-") return param1 - param2
+        if (operation == "+")
+            return param1 + param2
+        if (operation == "-")
+            return param1 - param2
     }
 
     function attackDirection(piece) {

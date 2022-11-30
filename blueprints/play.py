@@ -12,12 +12,12 @@ bp = Blueprint('play', __name__, url_prefix='/play')
 @bp.route('/')
 def play():
     return render_template('play.html')
-
+# play page
 
 @bp.route('/chess')
 def chess():
     return render_template('chess.html')
-
+# play chess page
 
 @bp.route('/chess/saveRecord')
 @login_required
@@ -30,7 +30,7 @@ def chess_save_record():
         user.chess_win += 1
     db.session.commit()
     return {}
-
+# Store winning and losing information
 
 @bp.route('/chess/range')
 def chess_range():
@@ -39,3 +39,4 @@ def chess_range():
     for user in users:
         result.append({"username": user.username, "chessWin": user.chess_win, "chessLose": user.chess_lose})
     return result
+# Ranking information

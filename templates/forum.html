@@ -33,10 +33,10 @@
             </div>
             <div class="question-main">
               <div class="question-title"><a style="font-size: 25px" href="{{ url_for('forum.question_detail',question_id=question.id) }}">{{ question.title }}</a></div>
-              <div class="question-content" style="font-size: 20px">{{ question.content }}</div>
+              <div class="question-content" style="font-size: 20px; color: #000000;" >{{ question.content }}</div>
               <div class="question-detail">
-                <span class="question-author" style="font-size: 20px">{{ question.author.username }}</span>
-                <span class="question-time" style="font-size: 20px">{{ question.create_time }}</span>
+                <span class="question-author" style="font-size: 20px; color: #000000;">{{ question.author.username }}</span>
+                <span class="question-time" style="font-size: 20px; color: #000000;">{{ question.create_time }}</span>
               </div>
             </div>
           </li>

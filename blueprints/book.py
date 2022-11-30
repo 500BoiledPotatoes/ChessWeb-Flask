@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, g, request, redirect, url_for, flash
+from flask import Blueprint, render_template, g, request, redirect, url_for, flash, session
 from sqlalchemy import or_, text
 
 from decorators import login_required
@@ -17,6 +17,7 @@ def add():
         publisher = request.form["publisher"]
         year = request.form["year"]
         author = request.form['author']
+        #Gets the value passed from the front end
         try:
             new_book = BookModel(type=booktype, title=booktitle, publisher=publisher, year=year, author=author)
             db.session.add(new_book)
@@ -27,7 +28,7 @@ def add():
             flash("Fil to add!", 'danger')
             db.session.rollback()
     return render_template("book_add.html")
-
+# Add a book to the database
 
 @bp.route('/', methods=['GET', 'POST'])
 def search():
@@ -42,6 +43,7 @@ def search():
         if (end_year == ''):
             end_year = 99999
         author = request.form['author']
+        # Gets the value passed from the front end
         results = BookModel.query.filter(
             BookModel.type.like('%' + booktype) if booktype is not None else text(""),
             BookModel.title.like('%' + bookname) if bookname is not None else text(""),
@@ -50,12 +52,15 @@ def search():
             BookModel.year >= start_year,
             BookModel.year <= end_year,
         ).all()
+        #Fuzzy query
         if (results):
             return render_template('result.html', results=results)
         else:
             flash('No related books!', 'warning')
             return render_template('search.html')
     return render_template('search.html')
+#Search related books
+
 
 @bp.route('/delete/<int:book_id>', methods=['GET', 'POST'])
 def delete(book_id):
@@ -69,18 +74,24 @@ def delete(book_id):
         db.session.rollback()
         return redirect(url_for('book.search'))
     return redirect(url_for('book.search'))
-
+#Delete a single book
 @bp.route('/deleteAll', methods=['GET', 'POST'])
 def deleteAll():
-    try:
-        if request.method == 'POST':
-            books = BookModel.query.all()
-            for book in books:
-                db.session.delete(book)
-        db.session.commit()
-        flash('Successfully delete')
-    except BaseException as e:
-        flash('Delete Failed')
-        db.session.rollback()
-        return redirect(url_for('book.search'))
+    if 'user_id' in session and session['user_id']== 1:
+        print(session['user_id'])
+        try:
+            if request.method == 'POST':
+                books = BookModel.query.all()
+                for book in books:
+                    db.session.delete(book)
+            db.session.commit()
+            flash('Successfully delete')
+        except BaseException as e:
+            flash('Delete Failed')
+            db.session.rollback()
+            return redirect(url_for('book.search'))
+    else:
+        flash("You are not Administrator")
+
     return redirect(url_for('book.search'))
+# Delete all books
