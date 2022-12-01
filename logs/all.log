@@ -3050,3 +3050,38 @@
 2022-12-01 16:31:07,024 [9536:Thread-54] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:31:07] "GET /play/game HTTP/1.1" 200 -
 2022-12-01 16:31:07,052 [7760:Thread-55] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:31:07] "[36mGET /static/bootstrap/bootstrap.4.6.1.min.css HTTP/1.1[0m" 304 -
 2022-12-01 16:31:07,053 [10448:Thread-56] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:31:07] "[36mGET /static/css/init.css HTTP/1.1[0m" 304 -
+2022-12-01 16:33:17,246 [23516:MainThread] [_internal.py:_internal:_log] [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2022-12-01 16:33:17,246 [23516:MainThread] [_internal.py:_internal:_log] [INFO]: [33mPress CTRL+C to quit[0m
+2022-12-01 16:33:17,247 [23516:MainThread] [_internal.py:_internal:_log] [INFO]:  * Restarting with stat
+2022-12-01 16:33:17,969 [8720:MainThread] [_internal.py:_internal:_log] [WARNING]:  * Debugger is active!
+2022-12-01 16:33:17,976 [8720:MainThread] [_internal.py:_internal:_log] [INFO]:  * Debugger PIN: 105-984-972
+2022-12-01 16:33:18,155 [21312:Thread-2] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:18] "GET / HTTP/1.1" 200 -
+2022-12-01 16:33:18,237 [5048:Thread-3] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:18] "[36mGET /static/images/bg1.png HTTP/1.1[0m" 304 -
+2022-12-01 16:33:18,238 [10676:Thread-4] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:18] "[36mGET /static/images/bg2.png HTTP/1.1[0m" 304 -
+2022-12-01 16:33:18,240 [12312:Thread-5] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:18] "[36mGET /static/images/bg3.png HTTP/1.1[0m" 304 -
+2022-12-01 16:33:18,240 [4008:Thread-6] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:18] "[36mGET /static/images/bg4.png HTTP/1.1[0m" 304 -
+2022-12-01 16:33:18,292 [18960:Thread-7] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:18] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2022-12-01 16:33:20,343 [18256:Thread-8] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:20] "GET /play/ HTTP/1.1" 200 -
+2022-12-01 16:33:20,374 [11984:Thread-9] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:20] "[36mGET /static/bootstrap/bootstrap.4.6.1.min.css HTTP/1.1[0m" 304 -
+2022-12-01 16:33:20,375 [19452:Thread-10] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:20] "[36mGET /static/css/init.css HTTP/1.1[0m" 304 -
+2022-12-01 16:33:20,375 [17136:Thread-11] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:20] "[36mGET /static/css/index.css HTTP/1.1[0m" 304 -
+2022-12-01 16:33:20,376 [7016:Thread-12] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:20] "[36mGET /static/css/play.css HTTP/1.1[0m" 304 -
+2022-12-01 16:33:20,390 [13188:Thread-13] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:20] "[36mGET /static/images/chess.png HTTP/1.1[0m" 304 -
+2022-12-01 16:33:20,393 [23028:Thread-14] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:20] "[36mGET /static/images/wuzi.jpg HTTP/1.1[0m" 304 -
+2022-12-01 16:33:21,528 [7212:Thread-15] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:21] "GET /user/login HTTP/1.1" 200 -
+2022-12-01 16:33:21,551 [17028:Thread-16] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:21] "[36mGET /static/bootstrap/bootstrap.4.6.1.min.css HTTP/1.1[0m" 304 -
+2022-12-01 16:33:21,552 [5352:Thread-17] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:21] "[36mGET /static/css/init.css HTTP/1.1[0m" 304 -
+2022-12-01 16:33:21,552 [3140:Thread-18] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:21] "[36mGET /static/css/login.css HTTP/1.1[0m" 304 -
+2022-12-01 16:33:26,301 [17312:Thread-19] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:26] "[32mPOST /user/login HTTP/1.1[0m" 302 -
+2022-12-01 16:33:26,309 [16744:Thread-20] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:26] "[32mGET /play HTTP/1.1[0m" 308 -
+2022-12-01 16:33:26,317 [7088:Thread-21] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:26] "GET /play/ HTTP/1.1" 200 -
+2022-12-01 16:33:26,353 [10892:Thread-22] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:26] "[36mGET /static/bootstrap/bootstrap.4.6.1.min.css HTTP/1.1[0m" 304 -
+2022-12-01 16:33:26,354 [9544:Thread-23] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:26] "[36mGET /static/css/init.css HTTP/1.1[0m" 304 -
+2022-12-01 16:33:26,356 [3872:Thread-24] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:26] "[36mGET /static/css/index.css HTTP/1.1[0m" 304 -
+2022-12-01 16:33:26,357 [2484:Thread-25] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:26] "[36mGET /static/css/play.css HTTP/1.1[0m" 304 -
+2022-12-01 16:33:26,365 [5056:Thread-26] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:26] "[36mGET /static/images/chess.png HTTP/1.1[0m" 304 -
+2022-12-01 16:33:26,380 [20020:Thread-27] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:26] "[36mGET /static/images/wuzi.jpg HTTP/1.1[0m" 304 -
+2022-12-01 16:33:26,964 [13052:Thread-28] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:26] "GET /play/game HTTP/1.1" 200 -
+2022-12-01 16:33:26,989 [8580:Thread-29] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:26] "[36mGET /static/bootstrap/bootstrap.4.6.1.min.css HTTP/1.1[0m" 304 -
+2022-12-01 16:33:27,004 [18172:Thread-30] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:33:27] "[36mGET /static/css/init.css HTTP/1.1[0m" 304 -
