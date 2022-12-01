@@ -2740,3 +2740,53 @@
 2022-12-01 15:54:07,059 [1632:Thread-59] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 15:54:07] "[36mGET /static/images/pieces/wB.svg HTTP/1.1[0m" 304 -
 2022-12-01 15:54:07,060 [12312:Thread-60] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 15:54:07] "[36mGET /static/images/pieces/wN.svg HTTP/1.1[0m" 304 -
 2022-12-01 15:54:07,061 [320:Thread-61] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 15:54:07] "[36mGET /static/images/pieces/wK.svg HTTP/1.1[0m" 304 -
+2022-12-01 16:17:15,097 [16700:MainThread] [_internal.py:_internal:_log] [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2022-12-01 16:17:15,097 [16700:MainThread] [_internal.py:_internal:_log] [INFO]: [33mPress CTRL+C to quit[0m
+2022-12-01 16:18:26,945 [15504:MainThread] [_internal.py:_internal:_log] [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2022-12-01 16:18:26,945 [15504:MainThread] [_internal.py:_internal:_log] [INFO]: [33mPress CTRL+C to quit[0m
+2022-12-01 16:19:20,463 [20032:MainThread] [_internal.py:_internal:_log] [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2022-12-01 16:19:20,463 [20032:MainThread] [_internal.py:_internal:_log] [INFO]: [33mPress CTRL+C to quit[0m
+2022-12-01 16:19:22,179 [17756:Thread-1] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:19:22] "GET / HTTP/1.1" 200 -
+2022-12-01 16:19:22,268 [1552:Thread-2] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:19:22] "GET /static/images/bg1.png HTTP/1.1" 200 -
+2022-12-01 16:19:22,269 [19512:Thread-3] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:19:22] "GET /static/images/bg2.png HTTP/1.1" 200 -
+2022-12-01 16:19:22,269 [19980:Thread-4] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:19:22] "GET /static/images/bg3.png HTTP/1.1" 200 -
+2022-12-01 16:19:22,270 [6236:Thread-5] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:19:22] "GET /static/images/bg4.png HTTP/1.1" 200 -
+2022-12-01 16:19:22,333 [18824:Thread-6] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:19:22] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2022-12-01 16:19:24,038 [23220:Thread-7] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:19:24] "GET /play/ HTTP/1.1" 200 -
+2022-12-01 16:19:24,068 [22028:Thread-8] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:19:24] "GET /static/bootstrap/bootstrap.4.6.1.min.css HTTP/1.1" 200 -
+2022-12-01 16:19:24,069 [6080:Thread-9] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:19:24] "GET /static/css/init.css HTTP/1.1" 200 -
+2022-12-01 16:19:24,070 [15524:Thread-10] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:19:24] "GET /static/css/index.css HTTP/1.1" 200 -
+2022-12-01 16:19:24,071 [19424:Thread-11] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:19:24] "GET /static/css/play.css HTTP/1.1" 200 -
+2022-12-01 16:19:24,085 [5724:Thread-12] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:19:24] "GET /static/images/chess.png HTTP/1.1" 200 -
+2022-12-01 16:19:24,089 [16612:Thread-13] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:19:24] "GET /static/images/wuzi.jpg HTTP/1.1" 200 -
+2022-12-01 16:19:24,897 [20320:Thread-14] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:19:24] "GET /forum/ HTTP/1.1" 200 -
+2022-12-01 16:19:24,922 [2428:Thread-15] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:19:24] "[36mGET /static/bootstrap/bootstrap.4.6.1.min.css HTTP/1.1[0m" 304 -
+2022-12-01 16:19:24,923 [14060:Thread-16] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:19:24] "[36mGET /static/css/init.css HTTP/1.1[0m" 304 -
+2022-12-01 16:19:24,924 [3616:Thread-17] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:19:24] "[36mGET /static/css/index.css HTTP/1.1[0m" 304 -
+2022-12-01 16:19:24,933 [6088:Thread-18] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:19:24] "GET /static/images/avatar.png HTTP/1.1" 200 -
+2022-12-01 16:20:57,993 [14540:Thread-19] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:20:57] "GET / HTTP/1.1" 200 -
+2022-12-01 16:20:58,092 [11160:Thread-21] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:20:58] "[36mGET /static/images/bg2.png HTTP/1.1[0m" 304 -
+2022-12-01 16:20:58,093 [3448:Thread-22] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:20:58] "[36mGET /static/images/bg3.png HTTP/1.1[0m" 304 -
+2022-12-01 16:20:58,093 [5448:Thread-20] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:20:58] "[36mGET /static/images/bg1.png HTTP/1.1[0m" 304 -
+2022-12-01 16:20:58,095 [10548:Thread-23] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:20:58] "[36mGET /static/images/bg4.png HTTP/1.1[0m" 304 -
+2022-12-01 16:20:58,148 [1848:Thread-24] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:20:58] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2022-12-01 16:21:00,236 [2832:Thread-25] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:21:00] "GET /play/ HTTP/1.1" 200 -
+2022-12-01 16:21:00,267 [22832:Thread-26] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:21:00] "[36mGET /static/bootstrap/bootstrap.4.6.1.min.css HTTP/1.1[0m" 304 -
+2022-12-01 16:21:00,269 [10164:Thread-27] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:21:00] "[36mGET /static/css/init.css HTTP/1.1[0m" 304 -
+2022-12-01 16:21:00,271 [13292:Thread-28] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:21:00] "[36mGET /static/css/index.css HTTP/1.1[0m" 304 -
+2022-12-01 16:21:00,272 [20416:Thread-29] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:21:00] "[36mGET /static/css/play.css HTTP/1.1[0m" 304 -
+2022-12-01 16:21:00,284 [14740:Thread-30] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:21:00] "[36mGET /static/images/chess.png HTTP/1.1[0m" 304 -
+2022-12-01 16:21:00,288 [22364:Thread-31] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:21:00] "[36mGET /static/images/wuzi.jpg HTTP/1.1[0m" 304 -
+2022-12-01 16:21:01,107 [1960:Thread-32] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:21:01] "GET /forum/ HTTP/1.1" 200 -
+2022-12-01 16:21:01,133 [8540:Thread-33] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:21:01] "[36mGET /static/bootstrap/bootstrap.4.6.1.min.css HTTP/1.1[0m" 304 -
+2022-12-01 16:21:01,135 [6272:Thread-34] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:21:01] "[36mGET /static/css/init.css HTTP/1.1[0m" 304 -
+2022-12-01 16:21:01,135 [13040:Thread-35] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:21:01] "[36mGET /static/css/index.css HTTP/1.1[0m" 304 -
+2022-12-01 16:21:01,141 [21912:Thread-36] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:21:01] "[36mGET /static/images/avatar.png HTTP/1.1[0m" 304 -
+2022-12-01 16:21:02,713 [17000:Thread-37] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:21:02] "GET /forum/ HTTP/1.1" 200 -
+2022-12-01 16:21:02,733 [16556:Thread-38] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:21:02] "[36mGET /static/bootstrap/bootstrap.4.6.1.min.css HTTP/1.1[0m" 304 -
+2022-12-01 16:21:02,735 [8860:Thread-39] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:21:02] "[36mGET /static/css/init.css HTTP/1.1[0m" 304 -
+2022-12-01 16:21:02,736 [9576:Thread-40] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:21:02] "[36mGET /static/css/index.css HTTP/1.1[0m" 304 -
+2022-12-01 16:21:02,746 [4328:Thread-41] [_internal.py:_internal:_log] [INFO]: 127.0.0.1 - - [01/Dec/2022 16:21:02] "[36mGET /static/images/avatar.png HTTP/1.1[0m" 304 -

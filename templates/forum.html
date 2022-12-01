@@ -29,7 +29,7 @@
         {% for question in questions %}
           <li>
             <div class="side-question">
-              <img class="side-question-avatar" src="{{ url_for('static',filename='images/avatar.png') }}" alt="">
+              <img class="side-question-avatar" src="{{ url_for('static',filename='images/img.png') }}" alt="">
             </div>
             <div class="question-main">
               <div class="question-title"><a style="font-size: 25px" href="{{ url_for('forum.question_detail',question_id=question.id) }}">{{ question.title }}</a></div>
