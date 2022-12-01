@@ -43,6 +43,7 @@ def chess_range():
 # Ranking information
 
 @bp.route('/game', methods=['GET', 'POST'])
+@login_required
 def game():
     form = ChessForm()
     # Check if login
