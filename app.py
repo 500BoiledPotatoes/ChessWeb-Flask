@@ -2,7 +2,6 @@ import logging
 
 from flask import Flask, jsonify, url_for, redirect, render_template, session, g
 from sqlalchemy import column
-from flask_migrate import Migrate
 from exts import db, mail,logger
 from blueprints import user_bp
 from blueprints import forum_bp
@@ -20,7 +19,6 @@ app.secret_key = "fjhierhgiejgeriojgo"
 
 db.init_app(app)
 mail.init_app(app)
-migrate = Migrate(app, db)
 
 logger.init_app(app)
 
