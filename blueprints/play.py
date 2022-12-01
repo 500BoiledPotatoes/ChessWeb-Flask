@@ -45,6 +45,7 @@ def chess_range():
 @bp.route('/game', methods=['GET', 'POST'])
 def game():
     form = ChessForm()
+    # Check if login
     if not session.get("USERNAME") is None:
         if form.validate_on_submit():
             x = int(form.xy.data.split()[0]) + 1
@@ -111,7 +112,7 @@ def game():
             else:
                 return redirect('/play/create')
     return redirect('/play')
-
+# Gobang play
 
 @bp.route('/create', methods=['GET', 'POST'])
 def test():
@@ -129,3 +130,4 @@ def test():
     user_in_db = UserModel.query.filter(UserModel.username == session.get("USERNAME")).first()
     id = user_in_db.id
     return render_template('join.html', form=form, id=id)
+# Create game
