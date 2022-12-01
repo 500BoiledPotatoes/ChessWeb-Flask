@@ -58,3 +58,12 @@ class AnswerModel(db.Model):
     def __str__(self):
         return self.content
 # Table of comments
+class Games(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	player = db.Column(db.Integer)
+	game = db.Column(db.String(256))
+	player1 = db.Column(db.Integer)
+	player2 = db.Column(db.Integer)
+	winner = db.Column(db.Integer)
+	def __repr__(self):
+		return 'test game'

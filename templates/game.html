@@ -1,0 +1,342 @@
+{% extends "loggedin_base.html" %}
+
+{% block content %}
+     <div class="row mt-4">
+        <div class="col"></div>
+        <div class="col">
+	<form action="" method="post" novalidate>
+	{{ form.hidden_tag() }}
+		<p>
+            {{winner}}<br>
+        </p>
+		<p>
+            {{ form.xy.label }}<br>
+            {{ form.xy(size=300) }}
+        </p>
+		<p>
+            {{ form.win.label }}<br>
+            {{ form.win(size=300) }}
+        </p>
+		
+		<p>{{ form.submit() }}</p>
+	</form>
+	<p id="hint"></p>
+	<p id="h">{{g}}</p>
+	<p id="k">{{player}}</p>
+    <canvas width="450" height="450"></canvas>
+                        <div class="col"></div>
+    </div>
+ </div>
+    <script type="text/javascript">
+		let haveChess = false;
+		let m = document.querySelector('#h');
+		let s = m.textContent;
+		let player = document.querySelector('#k').textContent;
+        let myCanvas = document.querySelector('canvas');
+        let ctx = myCanvas.getContext('2d');
+        //grid 15*15
+        let gridSize = 30;
+        let chessboard = [];
+		
+        for(let y = 0; y < myCanvas.height / gridSize ; y ++){
+            
+            chessboard[y] = [];
+            for(let x = 0; x < myCanvas.width / gridSize; x ++){
+                
+                chessboard[y][x] = 0;
+            }
+        }
+
+       
+        ctx.strokeStyle = "#666";
+        
+        for(let i = 0; i < myCanvas.width / gridSize; i++){     
+            
+            ctx.beginPath();
+            ctx.moveTo(0 + gridSize/2, i*gridSize + gridSize/2);
+            
+            ctx.lineTo(myCanvas.width - gridSize/2, i*gridSize + gridSize/2);
+            ctx.stroke();
+
+            
+            ctx.beginPath();
+            ctx.moveTo(i*gridSize + gridSize/2, 0 + gridSize/2);
+            ctx.lineTo(i*gridSize + gridSize/2, myCanvas.height - gridSize/2);
+            ctx.stroke()
+
+        }
+		// x y coordinates
+        function drawChessPieces(x, y,mode,p){
+			if(mode){
+            if(chessboard[y][x] !== 0){     
+                alert("You can only put on a blank position");
+                return;
+            }
+			}
+            //transforming
+            let canvas_x = gridSize * x + gridSize/2;
+            let canvas_y = gridSize * y + gridSize/2;
+            ctx.beginPath();
+            ctx.arc(canvas_x , canvas_y , 13, 0, Math.PI*2);
+         
+            let g = ctx.createRadialGradient(canvas_x , canvas_y, 13, canvas_x, canvas_y ,0);
+
+            if(p=='1'){
+                g.addColorStop(0, "#0a0a0a");   
+                g.addColorStop(1, "#f9f9f9");   
+                ctx.fillStyle = g;
+                chessboard[y][x] = 1;
+
+            }else {
+                g.addColorStop(0, "#999999");
+                g.addColorStop(1, "#fafafa");
+                ctx.fillStyle = g;
+                chessboard[y][x] = 2;
+            }
+            ctx.fill();
+			
+
+        }
+		let i = 0;
+		for(let x = 0; x <	15 ; x ++){
+
+            for(let y = 0; y < 15; y ++){
+               
+                chessboard[x][y] = parseInt(s.charAt(i))
+				if(chessboard[x][y]==1){
+					drawChessPieces(y,x,false,'1')}
+				if(chessboard[x][y]==2){
+					drawChessPieces(y,x,false,'2')}
+				i++;
+            }
+        }
+       
+        myCanvas.onclick = function(event){
+			if(haveChess==false){
+			//screen transform to gameboard
+            let x = Math.floor(event.offsetX / gridSize);
+            let y = Math.floor(event.offsetY / gridSize);
+			//y shi hang x shi lie
+			
+           
+			drawChessPieces(x ,y,true,player);
+			
+			let w = document.querySelector('#win');
+			let loc = document.querySelector('#xy');
+			if(isWin(chessboard,parseInt(player),y,x)){
+				w.value = "win"
+			}
+			else{
+				w.value = "playing"}
+			loc.value = y+" "+x;
+			haveChess=true;
+			}
+			else{
+				let hint = document.querySelector('#hint');
+				hint.innerText = "You have done your action"
+			}
+        };
+		
+		
+		function isWin(arr,player,x,y){
+			return c(0,arr,player,x,y)||c(1,arr,player,x,y)||c(2,arr,player,x,y)||c(3,arr,player,x,y)
+		}
+		
+		function c(d,arr,player,x,y){
+			link = 1;
+			if(d==0){
+				m = true;
+				n = true;
+				y1 = y;
+				while(m){
+				if(haveleft(x,y1)){
+					m = checkleft(x,y1);
+					if(m){
+					link++;
+					y1--;}
+					else{
+					m = false;}
+				}
+				else{
+					m = false;
+				}
+				
+				}
+				y1 = y;
+				while(n){
+				if(haveright(x,y1)){
+					n = checkright(x,y1);
+					if(n){
+					link++;
+					y1++;}
+					else{
+					m = false;}
+				}
+				else{
+					n = false;
+				}
+			}}
+			if(d==1){
+				m = true;
+				n = true;
+				x1 = x;
+				while(m){
+				if(haveon(x1,y)){
+					m = checkon(x1,y);
+					if(m){
+					link++;
+					x1--;}
+					else{
+					m = false;}
+				}
+				else{
+					m = false;
+				}
+				
+				}
+				x1 = x;
+				while(n){
+				if(havedown(x1,y)){
+					n = checkdown(x1,y);
+					if(n){
+					link++;
+					x1++;}
+					else{
+					n = false;}
+				}
+				else{
+					n = false;
+				}
+			}}
+			if(d==2){
+				m = true;
+				n = true;
+				x1 = x;
+				y1 = y;
+				while(m){
+				if(havelefton(x1,y1)){
+					m = checklefton(x1,y1);
+					if(m){
+					link++;
+					x1--;
+					y1--;}
+					else{
+					m = false;}
+				}
+				else{
+					m = false;
+				}
+				
+				}
+				x1 = x;
+				y1 = y;
+				while(n){
+				if(haverightdown(x1,y1)){
+					n = checkrightdown(x1,y1);
+					if(n){
+					link++;
+					x1++;
+					y1++;}
+					else{
+					n = false;}
+				}
+				else{
+					n = false;
+				}
+			}}
+			if(d==3){
+				m = true;
+				n = true;
+				x1 = x;
+				y1 = y;
+				while(m){
+				if(haveleftdown(x1,y1)){
+					m = checkleftdown(x1,y1);
+					if(m){
+					link++;
+					x1++;
+					y1--;}
+					else{
+					m = false;}
+				}
+				else{
+					m = false;
+				}
+				
+				}
+				x1 = x;
+				y1 = y;
+				while(n){
+				if(haverighton(x1,y1)){
+					n = checkrighton(x1,y1);
+					if(n){
+					link++;
+					x1--;
+					y1++;}
+					else{
+					n = false;}
+				}
+				else{
+					n = false;
+				}
+			}}
+			return link>=5;
+		}
+		
+		function haveleft(x,y){
+			return y!=0
+		}
+		function checkleft(x,y){
+			return chessboard[x][y-1]==player;
+		}
+		function haveright(x,y){
+			return y!=14
+		}
+		function checkright(x,y){
+			return chessboard[x][y+1]==player;
+		}
+		
+		function haveon(x,y){
+			return x!=0
+		}
+		function checkon(x,y){
+			return chessboard[x-1][y]==player;
+		}
+		function havedown(x,y){
+			return x!=14
+		}
+		function checkdown(x,y){
+		
+			return chessboard[x+1][y]==player;
+		}
+		
+		function havelefton(x,y){
+			return x!=0&&y!=0
+		}
+		function checklefton(x,y){
+			return chessboard[x-1][y-1]==player;
+		}
+		function haverightdown(x,y){
+			return x!=14&&y!=14
+		}
+		function checkrightdown(x,y){
+			return chessboard[x+1][y+1]==player;
+		}
+		
+		function haveleftdown(x,y){
+			return x!=14&&y!=0
+		}
+		function checkleftdown(x,y){
+			return chessboard[x+1][y-1]==player;
+		}
+		function haverighton(x,y){
+			return x!=0&&y!=14
+		}
+		function checkrighton(x,y){
+			return chessboard[x-1][y+1]==player;
+		}
+	</script>
+
+{% endblock %}
+
+

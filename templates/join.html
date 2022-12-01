@@ -1,0 +1,29 @@
+{% extends "loggedin_base.html" %}
+
+{% block content %}
+ <div class="row mt-4">
+        <div class="col"></div>
+        <div class="col">
+<form action="" method="post" novalidate>
+
+	{{ form.hidden_tag() }}
+	<p>
+		Your id is {{id}}<br>
+	</p>
+	<p>
+		{{ form.player1.label }}<br>
+            {{ form.player1(size=500) }}
+        </p>
+	<p>
+            {{ form.player2.label }}<br>
+            {{ form.player2(size=500) }}
+        </p>
+	
+		
+		<p>{{ form.submit() }}</p>
+
+</form>
+                    <div class="col"></div>
+    </div>
+ </div>
+{% endblock %}

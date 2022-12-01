@@ -30,6 +30,7 @@ def login():
             if user and check_password_hash(user.password, password):
                 # Verify that the username and password match
                 session['user_id'] = user.id
+                session['USERNAME'] = user.username
                 return redirect("/play")
             # After the verification is successful, the main screen is displayed
 

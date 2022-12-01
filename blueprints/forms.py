@@ -1,7 +1,7 @@
 import wtforms
-from wtforms.validators import length, email, EqualTo, InputRequired
+from wtforms.validators import length, email, EqualTo, InputRequired, DataRequired
 from models import EmailCaptchaModel, UserModel
-
+from flask_wtf import FlaskForm
 class LoginForm(wtforms.Form):
     email = wtforms.StringField(validators=[email()])
     password = wtforms.StringField(validators=[length(min=6, max=20)])
@@ -63,4 +63,13 @@ class ChangeSignForm(wtforms.Form):
     signature = wtforms.StringField(validators=[length(min=0, max=20)])
     email = wtforms.StringField(validators=[email()])
     # A form for modifying signature
+class JoinForm(FlaskForm):
+	player1 = wtforms.StringField('PlayerId', validators=[DataRequired()])
+	player2 = wtforms.StringField('PlayerId2',validators=[DataRequired()])
+	submit = wtforms.SubmitField('Create a match')
+
+class ChessForm(FlaskForm):
+	xy = wtforms.StringField('XY',validators=[DataRequired()])
+	win = wtforms.StringField('ISWIN',validators=[DataRequired()])
+	submit = wtforms.SubmitField('Confirm SUBMIT')
 
