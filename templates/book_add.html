@@ -50,30 +50,30 @@
                         <form action="{{ url_for('book.add') }}" method="POST">
                     <div class="form-group">
                     <label for="serialNumber">Title</label>
-                    <input type="text" class="form-control" name="bookname" id="startLocation" required>
+                    <input type="text" class="form-control" name="bookname" id="startLocation" required oninvalid="setCustomValidity('Please enter your message!');" oninput="setCustomValidity('');">
                 </div>
                                      <div class="form-group">
                     <label for="flightDate">Author</label>
-                    <input name="author" class="form-control" id="flightDate" required>
+                    <input name="author" class="form-control" id="flightDate" required oninvalid="setCustomValidity('Please enter your message!');" oninput="setCustomValidity('');">
                 </div>
                 <div class="form-group">
                     <label for="serialNumber">Publisher</label>
-                    <input type="text" class="form-control" name="publisher" id="destination" required>
+                    <input type="text" class="form-control" name="publisher" id="destination" required oninvalid="setCustomValidity('Please enter your message!');" oninput="setCustomValidity('');">
                 </div>
 
                 <div class="form-group">
                     <label for="flightDate">Year</label>
-                    <input type="number" name="year" class="form-control" id="flightDate" required>
+                    <input type="number" name="year" class="form-control" id="flightDate" required oninvalid="setCustomValidity('Please enter your message!');" oninput="setCustomValidity('');">
                 </div>
                                         <label for="radio1">Type</label>
                     <div class="form-group" id="radio1">
 
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="booktype" id="flightRadio" value="Chess" required>
+                        <input class="form-check-input" type="radio" name="booktype" id="flightRadio" value="Chess" required oninvalid="setCustomValidity('Please enter your message!');" oninput="setCustomValidity('');">
                         <label class="form-check-label" for="flightRadio">Chess</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="booktype" id="trainRadio" value="Gobang" required>
+                        <input class="form-check-input" type="radio" name="booktype" id="trainRadio" value="Gobang" required oninvalid="setCustomValidity('Please enter your message!');" oninput="setCustomValidity('');">
                         <label class="form-check-label" for="trainRadio">Gobang</label>
                     </div>
                 </div>
