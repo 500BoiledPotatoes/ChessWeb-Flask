@@ -2,12 +2,13 @@ import os
 import random
 import string
 
-from flask import Blueprint, render_template, request, redirect, url_for, jsonify, session, flash
+from flask import Blueprint, render_template, request, redirect, url_for, jsonify, session, flash, current_app
 from sqlalchemy import or_
 
 from config import Config
 from exts import mail, db
 from flask_mail import Message
+
 from models import EmailCaptchaModel, UserModel, ForumModel
 from datetime import datetime
 from .forms import RegisterForm, LoginForm, ChangeForm, ChangeNameForm
@@ -63,10 +64,15 @@ def register():
             password = form.password.data
             hash_password = generate_password_hash(password)
             # Hash encryption of passwords
-            user = UserModel(email=email, username=username, password=hash_password)
-            db.session.add(user)
-            # Load the user information into the database
-            db.session.commit()
+            try:
+                user = UserModel(email=email, username=username, password=hash_password)
+                db.session.add(user)
+                # Load the user information into the database
+                db.session.commit()
+                current_app.logger.info("Successfully register")
+            except Exception as e:
+                current_app.logger.debug("Failed to add user to the database", e)
+                db.session.rollback()
             return redirect(url_for("user.login"))
 
         else:
@@ -119,13 +125,18 @@ def user_change():
                 signature = form.signature.data
                 hash_password = generate_password_hash(password)
                 user = UserModel.query.filter_by(email=email).first()
-                if user and check_password_hash(user.password, password):
-                    UserModel.query.filter_by(email=email).update({'password': hash_password})
-                    UserModel.query.filter_by(email=email).update({'username': username})
-                if user:
-                    UserModel.query.filter_by(email=email).update({'signature': signature})
-                db.session.commit()
-                flash("Change success")
+                try:
+                    if user and check_password_hash(user.password, password):
+                        UserModel.query.filter_by(email=email).update({'password': hash_password})
+                        UserModel.query.filter_by(email=email).update({'username': username})
+                    if user:
+                        UserModel.query.filter_by(email=email).update({'signature': signature})
+                    db.session.commit()
+                    flash("Change success")
+                    current_app.logger.info("Successfully change")
+                except Exception as e:
+                    current_app.logger.debug("Database change data failure", e)
+                    db.session.rollback()
                 return redirect(url_for("user.centre", user_id=user.id))
             # To change the password, enter the correct old password
 
@@ -134,10 +145,14 @@ def user_change():
                 username = form.username.data
                 sign = form.signature.data
                 user = UserModel.query.filter_by(email=email).first()
-                if user:
-                    UserModel.query.filter_by(email=email).update({'username': username})
-                    UserModel.query.filter_by(email=email).update({'signature': sign})
-                    db.session.commit()
+                try:
+                    if user:
+                        UserModel.query.filter_by(email=email).update({'username': username})
+                        UserModel.query.filter_by(email=email).update({'signature': sign})
+                        db.session.commit()
+                except Exception as e:
+                    current_app.logger.debug("Database change data failure", e)
+                    db.session.rollback()
                 return redirect(url_for("user.centre", user_id=user.id))
             # Only the username is changed
     else:
@@ -154,6 +169,7 @@ def user_change():
 def centre(user_id):
     information = UserModel.query.get(user_id)
     return render_template("personalspace.html", information=information)
+    current_app.logger.info("Successfully query user")
 # Displays basic user information
 
 
@@ -161,6 +177,7 @@ def centre(user_id):
 def blog_personal(author_id):
     information = UserModel.query.get(author_id)
     questions = ForumModel.query.filter(ForumModel.author_id == author_id)
+    current_app.logger.info("Successfully query blog_personal")
     return render_template("personalblog.html", questions=questions, information=information)
 
 
@@ -172,7 +189,9 @@ def search(author_id):
     information = UserModel.query.get(author_id)
     questions = ForumModel.query.filter(or_(ForumModel.title.contains(q), ForumModel.content.contains(q))).order_by(
         db.text("-create_time"))
+    current_app.logger.info("Successfully search book")
     return render_template("personalblog.html", questions=questions, information=information)
+
 # Search for posts by keyword
 @bp.route('/navigation/<int:user_id>')
 def navigation(user_id):

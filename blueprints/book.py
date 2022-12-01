@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, g, request, redirect, url_for, flash, session
+from flask import Blueprint, render_template, g, request, redirect, url_for, flash, session, logging, current_app
 from sqlalchemy import or_, text
 
 from decorators import login_required
@@ -23,9 +23,10 @@ def add():
             db.session.add(new_book)
             db.session.commit()
             flash('Successfully added!', 'success')
+            current_app.logger.info("Add book successfully")
         except Exception as e:
-            print(e)
             flash("Fil to add!", 'danger')
+            current_app.logger.debug("Failed to add data to the database", e)
             db.session.rollback()
     return render_template("book_add.html")
 # Add a book to the database
@@ -52,6 +53,7 @@ def search():
             BookModel.year >= start_year,
             BookModel.year <= end_year,
         ).all()
+        current_app.logger.info("Search book successfully")
         #Fuzzy query
         if (results):
             return render_template('result.html', results=results)
@@ -69,8 +71,10 @@ def delete(book_id):
         db.session.delete(book)
         db.session.commit()
         flash('Successfully delete')
+        current_app.logger.info("Successfully delete")
     except BaseException as e:
         flash('Delete failed')
+        current_app.logger.debug("Database deletion failed",e)
         db.session.rollback()
         return redirect(url_for('book.search'))
     return redirect(url_for('book.search'))
@@ -86,8 +90,10 @@ def deleteAll():
                     db.session.delete(book)
             db.session.commit()
             flash('Successfully delete')
+            current_app.logger.info("Successfully delete")
         except BaseException as e:
             flash('Delete Failed')
+            current_app.logger.debug("Database delete all data failed", e)
             db.session.rollback()
             return redirect(url_for('book.search'))
     else:

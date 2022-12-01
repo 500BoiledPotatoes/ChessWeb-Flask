@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, g, request, redirect, url_for, flash
+from flask import Blueprint, render_template, g, request, redirect, url_for, flash, current_app
 from sqlalchemy import or_
 
 from decorators import login_required
@@ -26,10 +26,16 @@ def post_question():
         if form.validate():
             title = form.title.data
             content = form.content.data
-            forum = ForumModel(title=title, content=content, author=g.user)
-            db.session.add(forum)
-            # Load the post information into the database
-            db.session.commit()
+            try:
+                forum = ForumModel(title=title, content=content, author=g.user)
+                db.session.add(forum)
+                # Load the post information into the database
+                current_app.logger.info("Successfully post")
+                db.session.commit()
+
+            except Exception as e:
+                current_app.logger.debug("Failed to add post to the database", e)
+                db.session.rollback()
             return redirect(url_for("forum.forum"))
         else:
             flash("Formal error")
@@ -51,10 +57,15 @@ def answer(question_id):
     form = AnswerForm(request.form)
     if form.validate():
         content = form.content.data
-        answer_model = AnswerModel(content=content,author=g.user,question_id=question_id)
-        db.session.add(answer_model)
-        # Load the comment information into the database
-        db.session.commit()
+        try:
+            answer_model = AnswerModel(content=content,author=g.user,question_id=question_id)
+            db.session.add(answer_model)
+            # Load the comment information into the database
+            db.session.commit()
+            current_app.logger.info("Successfully post comment")
+        except Exception as e:
+            current_app.logger.debug("Failed to add comment to the database", e)
+            db.session.rollback()
         return redirect(url_for("forum.question_detail",question_id=question_id))
     else:
         flash("Form validation failed!")

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, g, request, redirect, url_for, flash, session, jsonify
+from flask import Blueprint, render_template, g, request, redirect, url_for, flash, session, jsonify, current_app
 from sqlalchemy import or_
 
 from decorators import login_required
@@ -29,6 +29,7 @@ def chess_save_record():
     else:
         user.chess_win += 1
     db.session.commit()
+    current_app.logger.info("Successfully add win or lose")
     return {}
 # Store winning and losing information
 
