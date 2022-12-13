@@ -24,7 +24,6 @@ function game() {
         }
         if (!action.from && !action.currentPlayer && $grid.children(".chess").length == 1) {
             let $child = $($grid.children(".chess")[0])
-            // console.log($child)
             if ($child.attr("color") == "white") {
                 action.from = $grid
                 action.currentPlayer = $child.attr("color")
@@ -35,17 +34,18 @@ function game() {
             //Get the initial pieces and positions color
         } else if ($grid.children(".chess").length == 1) {
             let $child = $($grid.children(".chess")[0])
+            console.log($child.attr("color"))
             if (action.currentPlayer == $child.attr("color")) {
                 action.from = $grid
-                // console.log($child)
                 return
                 //Get subsequent pieces
+                //Determine if you are choosing a white piece
             } else {
                 clearBeforeMove()
                 //cancel move
+                //Can't choose a black piece
             }
         }
-
         if (!action.from) {
             return
         }
@@ -62,7 +62,8 @@ function game() {
         let $fromChild = $(action.from.children(".chess")[0])
         let moveGrids = moveScope($fromChild)
         let attackGrids = attackScope($fromChild)
-        let gridId = $grid ? $grid.attr("id") : null
+        let gridId = $grid ? $grid.attr("id") : null//step record
+
         if (moveGrids.length == 0 && attackGrids.length == 0) {
             return
             //Not move
@@ -74,7 +75,6 @@ function game() {
             }
         }
         if (gridId != action[2] && (moveGrids.indexOf(gridId) != -1 || attackGrids.indexOf(gridId) != -1)) {
-            console.log(moveGrids.indexOf(gridId))
             let $fromGrid = action.from
             let $toGrid = $grid
             clearBeforeMove()
@@ -119,9 +119,11 @@ function game() {
 
         if (piece.hasClass("rook")) {
             let centerGrid = piece.parent()
+            console.log(centerGrid)
             let directions = [top, right, bottom, left]
             for (let direction of directions) {
                 let tempGrid = direction(centerGrid)
+                // console.log(tempGrid)
                 while (tempGrid != undefined) {
                     if (tempGrid.children().length == 0) {
                         scope.push(tempGrid.attr("id"))
